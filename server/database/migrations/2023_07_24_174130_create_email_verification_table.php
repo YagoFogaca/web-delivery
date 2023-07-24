@@ -9,9 +9,9 @@ return new class extends Migration
 
     public function up(): void
     {
-        Schema::create('email_verification', function (Blueprint $table) {
+        Schema::create('email_verifications', function (Blueprint $table) {
             $table->id();
-            $table->string('id_referencia')->nullable();
+            $table->integer('id_referencia');
             $table->string('cod');
             $table->timestamps();
         });

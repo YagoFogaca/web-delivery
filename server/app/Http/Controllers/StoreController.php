@@ -2,7 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\Verification;
+use App\Models\EmailVerification;
 use Illuminate\Http\Request;
+use Exception;
+use App\Models\Store;
+use App\Utils\Code\Code;
+use Illuminate\Support\Facades\Mail;
 
 class StoreController extends Controller
 {
@@ -31,18 +37,30 @@ class StoreController extends Controller
             ]
         );
 
-        $data = $req->all();
-        $data['senha'] = bcrypt($req->senha);
-        $extension = $req->imagem->getClientOriginalExtension();
-        $data['imagem'] = $req->imagem->storeAs('logos', $data['email'] . ".{$extension}");
+        try {
+            $data = $req->all();
+            $data['senha'] = bcrypt($req->senha);
+            $extension = $req->imagem->getClientOriginalExtension();
+            $data['imagem'] = $req->imagem->storeAs('logos', $data['email'] . ".{$extension}");
 
+            $modelStore = Store::create($data);
+            if (!$modelStore) {
+                throw new Exception('Ocorreu um erro ao criar a loja');
+            }
+            $estore = $modelStore->toArray();
 
-        // Crio a loja (PRIMEIRO TESTAR O SALVAMENTO DA IMAGEM)
-        // Salvo o endereço
-        // Salvo a imagem na aplicação OK 
-        // Mando o email
-        // Salvo o código em email_verificado
+            $code = Code::generateCode();
+            Mail::to($data['email'])->send(new Verification([
+                'code' => $code,
+                'nome' => $data['nome'],
+            ]));
 
-        // Direcionar para validar o email
+            $modelEmailVerification = EmailVerification::create(['id_referencia' => $estore['id'], 'cod' => $code]);
+            if (!$modelEmailVerification) {
+                throw new Exception('Ocorreu um erro ao criar a loja');
+            }
+        } catch (Exception $error) {
+            redirect()->back()->withErrors($error->getMessage());
+        }
     }
 }
