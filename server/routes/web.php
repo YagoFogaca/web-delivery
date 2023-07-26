@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\StoreController;
+use App\Http\Controllers\EmailVerificationController;
 use Illuminate\Support\Facades\Route;
 
 Route::controller(StoreController::class)->group(function () {

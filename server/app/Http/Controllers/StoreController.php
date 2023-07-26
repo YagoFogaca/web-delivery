@@ -68,11 +68,13 @@ class StoreController extends Controller
                 'email' => $data['email'],
                 'password' =>  $data['senha'],
             ];
-            Auth::guard('store')->attempt($credenciais);
 
-            redirect()->route('email.verification');
+            if (!Auth::guard('store')->attempt($credenciais)) {
+                redirect()->back()->withErrors(['errorAuth' => 'Email ou senha inválidos']);
+            }
+            return redirect()->route('email.verification');
         } catch (Exception $error) {
-            redirect()->back()->withErrors($error->getMessage());
+            return redirect()->back()->withErrors($error->getMessage());
         }
     }
 }
