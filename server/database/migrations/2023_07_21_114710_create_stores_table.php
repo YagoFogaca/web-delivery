@@ -13,7 +13,7 @@ return new class extends Migration
             $table->id();
             $table->string('nome');
             $table->string('email')->unique();
-            $table->string('senha');
+            $table->string('password');
             $table->string('telefone');
             $table->string('imagem');
             $table->boolean('email_verificado')->default(0);
