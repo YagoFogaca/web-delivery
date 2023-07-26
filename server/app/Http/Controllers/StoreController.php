@@ -2,15 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\Verification;
 use App\Models\EmailVerification;
 use Illuminate\Http\Request;
 use Exception;
 use App\Models\Store;
-use App\Utils\Code\Code;
+use App\Utils\Email\Email;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Mail;
 
 class StoreController extends Controller
 {
@@ -53,11 +51,7 @@ class StoreController extends Controller
             }
             $estore = $modelStore->toArray();
 
-            $code = Code::generateCode();
-            Mail::to($data['email'])->send(new Verification([
-                'code' => $code,
-                'nome' => $data['nome'],
-            ]));
+            $code = Email::emailSending($data);
 
             $modelEmailVerification = EmailVerification::create(['id_referencia' => $estore['id'], 'cod' => $code]);
             if (!$modelEmailVerification) {
