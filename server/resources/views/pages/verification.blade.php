@@ -1,7 +1,7 @@
 @extends('layout.index')
 
 @section('content')
-    <form action={{ route('loja.store') }} method="post" enctype="multipart/form-data">
+    <form action={{ route('email.check') }} method="post">
         @csrf
         <div>
             <h6>Um código de validação foi enviado para o email informado.</h6>

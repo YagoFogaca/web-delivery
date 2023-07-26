@@ -2,23 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\EmailVerification;
+use App\Models\Store;
+use App\Utils\Email\Email;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class EmailVerificationController extends Controller
 {
-    //
     public function verification()
     {
         return view('pages.verification');
     }
+
     public function check(Request $req)
     {
-        // Pegar o id do que for pedido
-        // Validar se está dentro do prazo de 15 min
-        // Trocar campo de email_verificado para true
-        // Apagar o registro do código
-        // Redirecionar para endereço
 
         $req->validate(
             [
@@ -28,9 +27,33 @@ class EmailVerificationController extends Controller
                 'cod' => 'O código informado é invalido'
             ]
         );
+        $id = Auth::guard('store')->id();
+        $data = EmailVerification::where('id_referencia', $id)->first();
+        $cod = $req->input('cod');
+        $store = Store::find($id);
 
-        $id = Auth::id();
+        $horaCodigo = Carbon::parse($data['created_at'])->timestamp;
+        $horaAtual = Carbon::now()->timestamp;
+        $horaExpiracao = $horaCodigo + (15 * 60);
 
-        dd($id);
+        if ($horaAtual > $horaExpiracao) {
+            $data->delete();
+            // deve ser mandado outro cod email
+            // Mandar email e nome da loja
+            $code = Email::emailSending($store->toArray());
+            EmailVerification::create(['id_referencia' => $id, 'cod' => $code]);
+
+            return redirect()->back()->withErrors(['cod' => 'Código expirado']);
+        }
+
+        if ($data['cod'] !== $cod) {
+            return redirect()->back()->withErrors(['cod' => 'Código invalido']);
+        }
+
+        $store['email_verificado'] = 1;
+        $store->update($store->toArray());
+        $data->delete();
+
+        dd('funfou');
     }
 }
