@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Exception;
 use App\Models\Store;
 use App\Utils\Code\Code;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 
 class StoreController extends Controller
@@ -24,14 +26,14 @@ class StoreController extends Controller
             [
                 'nome' => 'required|min:4',
                 'email' => 'required|email',
-                'senha' => 'required|min:8',
+                'password' => 'required|min:8',
                 'telefone' => 'required|min:10',
                 'imagem' =>  'required|image'
             ],
             [
                 'nome' => 'Nome invalido',
                 'email' => 'Email invalido',
-                'senha' => 'Senha invalida',
+                'password' => 'Senha invalida',
                 'telefone' => 'Telefone invalido',
                 'imagem' => 'Sua imagem é invalida'
             ]
@@ -39,7 +41,9 @@ class StoreController extends Controller
 
         try {
             $data = $req->all();
-            $data['senha'] = bcrypt($req->senha);
+            $data['senha'] = $data['password'];
+            $data['password'] = Hash::make($data['password']);
+
             $extension = $req->imagem->getClientOriginalExtension();
             $data['imagem'] = $req->imagem->storeAs('logos', $data['email'] . ".{$extension}");
 
@@ -59,6 +63,14 @@ class StoreController extends Controller
             if (!$modelEmailVerification) {
                 throw new Exception('Ocorreu um erro ao criar a loja');
             }
+
+            $credenciais = [
+                'email' => $data['email'],
+                'password' =>  $data['senha'],
+            ];
+            Auth::guard('store')->attempt($credenciais);
+
+            redirect()->route('email.verification');
         } catch (Exception $error) {
             redirect()->back()->withErrors($error->getMessage());
         }
