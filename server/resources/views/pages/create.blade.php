@@ -23,7 +23,7 @@
         <br />
         <div>
             <label for="senha">Senha</label>
-            <input value="12345678" type="password" id="senha" name="senha" required>
+            <input value="12345678" type="password" id="senha" name="password" required>
             @error('senha')
                 <span>{{ $message }}</span>
             @enderror
