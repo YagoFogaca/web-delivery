@@ -52,6 +52,6 @@ class EmailVerificationController extends Controller
         $store->update($store->toArray());
         $data->delete();
 
-        dd('funfou');
+        return redirect()->route('address.index');
     }
 }
