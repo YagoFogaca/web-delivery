@@ -15,7 +15,7 @@ class StoreController extends Controller
 
     public function create()
     {
-        return view('pages.create');
+        return view('pages.create-account.index');
     }
 
     public function store(Request $req)

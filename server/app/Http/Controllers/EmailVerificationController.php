@@ -13,7 +13,7 @@ class EmailVerificationController extends Controller
 {
     public function verification()
     {
-        return view('pages.verification');
+        return view('pages.verification-email.index');
     }
 
     public function check(Request $req)
@@ -38,8 +38,6 @@ class EmailVerificationController extends Controller
 
         if ($horaAtual > $horaExpiracao) {
             $data->delete();
-            // deve ser mandado outro cod email
-            // Mandar email e nome da loja
             $code = Email::emailSending($store->toArray());
             EmailVerification::create(['id_referencia' => $id, 'cod' => $code]);
 

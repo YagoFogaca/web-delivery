@@ -44,7 +44,7 @@ class Verification extends Mailable
     public function content(): Content
     {
         return new Content(
-            html: 'pages.email',
+            html: 'pages.email-template.index',
         );
     }
 
