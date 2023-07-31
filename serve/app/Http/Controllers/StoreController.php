@@ -21,28 +21,25 @@ class StoreController extends Controller
 
     public function auth(Request $req)
     {
-
+        $req->validate(
+            [
+                'email' => 'required|email',
+                'password' => 'required|min:8'
+            ],
+            [
+                'email' => 'Email invalido',
+                'password' => 'Senha invalida'
+            ]
+        );
         try {
-            $store = $req->validate(
-                [
-                    'email' => 'required|email',
-                    'password' => 'required|min:8'
-                ],
-                [
-                    'email' => 'Email invalido',
-                    'password' => 'Senha invalida'
-                ]
-            );
             $credentials = [
-                'email' => $store['email'],
-                'password' =>  $store['password'],
+                'email' =>  $req->input('email'),
+                'password' => $req->input('password'),
             ];
-
             $store_auth = Auth::guard('store')->attempt($credentials);
             if (!$store_auth) {
                 throw new Exception('Email ou senha invalidos');
             }
-
             return redirect()->route('app.index');
         } catch (Exception $error) {
             return redirect()->back()->withErrors(['auth' => $error->getMessage()]);
