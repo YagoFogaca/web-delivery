@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\StoreController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +16,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::controller(StoreController::class)->group(function () {
+    Route::get('/store-auth', 'login')->name('store.login');
+    Route::post('/store-auth', 'auth')->name('store.auth');
 });
