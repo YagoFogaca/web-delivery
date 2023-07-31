@@ -19,3 +19,11 @@ Route::controller(AddressController::class)->group(function () {
     Route::get('/address/create', 'index')->name('address.index');
     Route::post('/address', 'storeAddress')->name('address.store');
 });
+
+Route::get('/home', function () {
+    $data = ['nome' => 'Fogaça'];
+    return view('pages.home-platform.index', $data);
+});
+
+//     ADD NOME DA LOJA JUNTO AO MENU dropdown
+//     ADD CONTROLLER PLATFORM
