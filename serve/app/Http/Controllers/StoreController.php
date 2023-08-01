@@ -2,22 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Store;
 use Exception;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
 class StoreController extends Controller
 {
     use AuthorizesRequests, ValidatesRequests;
-
-    public function login()
-    {
-        return view('pages.login-store.index');
-    }
 
     public function auth(Request $req)
     {
@@ -40,7 +33,7 @@ class StoreController extends Controller
             if (!$store_auth) {
                 throw new Exception('Email ou senha invalidos');
             }
-            return redirect()->route('app.index');
+            return redirect()->route('platform.index');
         } catch (Exception $error) {
             return redirect()->back()->withErrors(['auth' => $error->getMessage()]);
         }
