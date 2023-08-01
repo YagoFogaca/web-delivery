@@ -24,34 +24,13 @@
                 </li>
 
                 <li class="nav-item">
-                    <div class="btn-group" style="height: 100%;">
-                        <button type="button" class="btn-dropdown dropdown-toggle" data-bs-toggle="dropdown"
-                            data-bs-display="static" aria-expanded="false">
-                            Right-aligned, left-aligned lg
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-end">
-                            <li><a class="dropdown-item" href="#">Configuração</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Sair</a></li>
-                        </ul>
-                    </div>
+                    <a class="nav-link" href="#">Conta</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Sair</a>
                 </li>
 
             </ul>
-            {{-- <div class="btn-group">
-                <button type="button" class="btn-dropdown dropdown-toggle" data-bs-toggle="dropdown"
-                    data-bs-display="static" aria-expanded="false">
-                    Right-aligned, left-aligned lg
-                </button>
-                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-end">
-                    <li><a class="dropdown-item" href="#">Configuração</a></li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <li><a class="dropdown-item" href="#">Sair</a></li>
-                </ul>
-            </div> --}}
         </div>
 </nav>
