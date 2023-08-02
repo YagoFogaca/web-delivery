@@ -12,11 +12,11 @@
             <ul class="navbar-nav my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
 
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">Painel</a>
+                    <a class="nav-link active" href={{ route('platform.index') }}>Painel</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Produtos</a>
+                    <a class="nav-link" href={{ route('platform.products') }}>Produtos</a>
                 </li>
 
                 <li class="nav-item">

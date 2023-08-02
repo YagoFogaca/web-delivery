@@ -28,4 +28,7 @@ Route::controller(PlatformController::class)->group(function () {
 
     // Plataforma Loja
     Route::get('/platform-store', 'index')->name('platform.index');
+
+    // Página de produtos
+    Route::get('/platform-products', 'products')->name('platform.products');
 });

@@ -15,4 +15,9 @@ class PlatformController extends Controller
     {
         return view('pages.platform-home.index');
     }
+
+    public function products()
+    {
+        return view('pages.platform-products.index');
+    }
 }

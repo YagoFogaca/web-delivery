@@ -1,5 +1,5 @@
 @extends('layouts.platform-store.index')
 
 @section('content')
-    <h1>Teste</h1>
+    <h1>Products</h1>
 @endsection
