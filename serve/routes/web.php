@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\PlatformController;
 use Illuminate\Support\Facades\Route;
@@ -21,6 +22,10 @@ Route::get('/', function () {
 
 Route::controller(StoreController::class)->group(function () {
     Route::post('/store-auth', 'auth')->name('store.auth');
+});
+
+Route::controller(ProductsController::class)->group(function () {
+    Route::post('/create', 'create')->name('products.store');
 });
 
 Route::controller(PlatformController::class)->group(function () {
