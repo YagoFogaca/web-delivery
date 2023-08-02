@@ -14,4 +14,14 @@ class Category extends Model
     public $fillable = [
         'name',
     ];
+
+    public function products()
+    {
+        return $this->hasMany(Products::class);
+    }
+
+    public function productCount()
+    {
+        return $this->products->count();
+    }
 }

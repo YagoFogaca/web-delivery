@@ -19,7 +19,15 @@
                     </div>
                 </div>
             </form>
-            {{-- CONTINUAR COM AS CATEGORIAS. LISTADAS AQUI --}}
+            <div class="list-group">
+                @foreach ($categories as $category)
+                    <button type="button"
+                        class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        {{ $category->name }}
+                        <span class="badge bg-primary rounded-pill">{{ $category->productCount() }}</span>
+                    </button>
+                @endforeach
+            </div>
         </aside>
 
         <section class="container-products">
@@ -59,6 +67,16 @@
                             <label class="form-label" for="description">Descrição</label>
                             <input type="text" class="form-control" id="description" placeholder="Delicioso X-Burguer">
                         </div>
+
+                        <div class="mb-3">
+                            <label class="form-label" for="Categoria">Categoria</label>
+                            <select class="form-select">
+                                @foreach ($categories as $category)
+                                    <option value={{ $category->id }}>{{ $category->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
 
                         <div class="mb-3">
                             <label class="form-label" for="image">Imagem</label>
