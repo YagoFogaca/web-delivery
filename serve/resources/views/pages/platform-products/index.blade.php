@@ -34,8 +34,7 @@
         <section class="container-products">
             <div class="container-products--infos">
                 <h4>Produtos</h4>
-                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
-                    data-bs-target="#createModal">Criar produto</button>
+                <a href={{ route('platform.create.products') }} class="btn btn-outline-primary">Criar produto</a>
             </div>
             <article class="cards-products">
                 @foreach ($products as $product)
@@ -56,6 +55,4 @@
             </article>
         </section>
     </section>
-
-    @include('components.modal-create-products.index', ['categories' => $categories])
 @endsection

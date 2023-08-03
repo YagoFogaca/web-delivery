@@ -109,6 +109,22 @@
     height: 350px;
 }
 
+.container-form-create {
+    width: 50%;
+    margin: auto;
+}
+
+.container-form-create .btn-primary {
+    color: #eeeded;
+    background-color: #f86f03;
+    border: 1px solid #f86f03;
+    transition: all 300ms ease-in;
+}
+
+.container-form-create .btn-primary:hover {
+    opacity: 0.8;
+}
+
 @media (max-width: 960px) {
     .filter-menu {
         width: 100%;

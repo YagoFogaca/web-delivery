@@ -36,4 +36,6 @@ Route::controller(PlatformController::class)->group(function () {
 
     // Página de produtos
     Route::get('/platform-products', 'products')->name('platform.products');
+
+    Route::get('/create-products', 'store')->name('platform.create.products');
 });
