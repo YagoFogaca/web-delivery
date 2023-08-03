@@ -23,7 +23,8 @@
 
                     <div class="mb-3">
                         <label for="price" class="form-label">Preço</label>
-                        <input type="text" class="form-control" id="price" name="price" placeholder="19,90">
+                        <input type="number" min="0" step=".01" class="form-control" id="price"
+                            name="price" placeholder="19.90">
                         @error('price')
                             <div class='invalid-feedback'><span>{{ $message }}</span></div>
                         @enderror
