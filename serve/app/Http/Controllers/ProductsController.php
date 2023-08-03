@@ -39,14 +39,13 @@ class ProductsController extends Controller
                 'category_id' => intval($req->input('category'))
             ];
             $product['image'] = Image::saveImage($product['name'], $req);
-            // dd($product);
             $modelProducts = Products::create($product);
             if (!$modelProducts) {
                 throw new Exception('Ocorreu um erro ao criar o produto');
             }
-            dd($modelProducts);
+            return redirect()->back()->with('products', 'Produto criado com sucesso');
         } catch (Exception $error) {
-            dd($error->getMessage());
+            return redirect()->back()->withErrors(['products', 'Ocorreu um erro ao criar o produto']);
         }
     }
 }
