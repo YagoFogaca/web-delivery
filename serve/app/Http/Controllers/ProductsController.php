@@ -6,6 +6,7 @@ use App\Models\Products;
 use App\Utils\Image\Image;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductsController extends Controller
 {
@@ -46,6 +47,19 @@ class ProductsController extends Controller
             return redirect()->back()->with('products', 'Produto criado com sucesso');
         } catch (Exception $error) {
             return redirect()->back()->withErrors(['products', 'Ocorreu um erro ao criar o produto']);
+        }
+    }
+
+    public function delete(string $id)
+    {
+        try {
+            $products = Products::find($id)->delete();
+            if (!$products) {
+                throw new Exception('Ocorreu um erro ao deletar o produto');
+            }
+            return redirect()->back();
+        } catch (Exception $error) {
+            return redirect()->back()->withErrors(['products', 'Ocorreu um erro ao deletar o produto']);
         }
     }
 }

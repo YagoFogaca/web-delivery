@@ -47,7 +47,12 @@
                             <p class="card-text">{{ $product['category']['name'] }}</p>
                             <div class="d-grid gap-2">
                                 <a href="#" class="btn btn-warning">Editar</a>
-                                <a href="#" class="btn btn-outline-danger">Deletar</a>
+                                <form action={{ route('products.delete', ['id' => $product['id']]) }} method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" style="width: 100%"
+                                        class="btn btn-outline-danger">Deletar</button>
+                                </form>
                             </div>
                         </div>
                     </div>
