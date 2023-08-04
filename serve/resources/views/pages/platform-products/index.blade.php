@@ -46,7 +46,8 @@
                             <p class="card-text">{{ $product['description'] }}</p>
                             <p class="card-text">{{ $product['category']['name'] }}</p>
                             <div class="d-grid gap-2">
-                                <a href="#" class="btn btn-warning">Editar</a>
+                                <a href={{ route('platform.edit.products', ['product' => $product['id']]) }}
+                                    class="btn btn-warning">Editar</a>
                                 <form action={{ route('products.delete', ['id' => $product['id']]) }} method="POST">
                                     @csrf
                                     @method('DELETE')

@@ -30,4 +30,10 @@ class PlatformController extends Controller
         $categories = Category::with('products')->get();
         return view('pages.create-products.index', ['categories' => $categories]);
     }
+
+    public function edit(Products $product)
+    {
+        $categories = Category::with('products')->get();
+        return view('pages.edit-products.index', ['product' => $product->toArray(), 'categories' => $categories]);
+    }
 }

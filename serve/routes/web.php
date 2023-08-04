@@ -31,12 +31,8 @@ Route::controller(ProductsController::class)->group(function () {
 
 Route::controller(PlatformController::class)->group(function () {
     Route::get('/store-auth', 'login')->name('store.login');
-
-    // Plataforma Loja
     Route::get('/platform-store', 'index')->name('platform.index');
-
-    // Página de produtos
     Route::get('/platform-products', 'products')->name('platform.products');
-
     Route::get('/create-products', 'store')->name('platform.create.products');
+    Route::get('/products/{product}/edit/', 'edit')->name('platform.edit.products');
 });
