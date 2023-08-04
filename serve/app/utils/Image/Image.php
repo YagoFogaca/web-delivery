@@ -6,7 +6,8 @@ class Image
 {
   public static function saveImage($name, $req)
   {
+    $name_verify = str_replace(' ', '-', $name);
     $extension = $req->image->getClientOriginalExtension();
-    return $req->image->storeAs('products', $name . ".{$extension}");
+    return $req->image->storeAs('products', $name_verify . ".{$extension}");
   }
 }
