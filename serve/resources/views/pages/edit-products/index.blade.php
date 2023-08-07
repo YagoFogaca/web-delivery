@@ -31,10 +31,10 @@
             </div>
 
             <div class="col-md-6">
-                <label for="price" class="form-label">Preço</label>
-                <input type="number" min="0" step=".01" class="form-control" id="price" name="price"
+                <label for="prince" class="form-label">Preço</label>
+                <input type="number" min="0" step=".01" class="form-control" id="prince" name="prince"
                     placeholder="19.90" value={{ $product['prince'] }}>
-                @error('price')
+                @error('prince')
                     <div class='invalid-feedback'><span>{{ $message }}</span></div>
                 @enderror
             </div>
