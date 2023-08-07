@@ -39,7 +39,7 @@ class ProductsController extends Controller
                 'image' => $req->image,
                 'category_id' => intval($req->input('category'))
             ];
-            $product['image'] = Image::saveImage($product['name'], $req);
+            $product['image'] = Image::save($product['name'], $req);
             $modelProducts = Products::create($product);
             if (!$modelProducts) {
                 throw new Exception('Ocorreu um erro ao criar o produto');
@@ -53,13 +53,50 @@ class ProductsController extends Controller
     public function delete(string $id)
     {
         try {
-            $products = Products::find($id)->delete();
-            if (!$products) {
+            $product = Products::find($id);
+            $productDeleted = $product->delete();
+            Image::delete($product->toArray()['image']);
+            if (!$productDeleted) {
                 throw new Exception('Ocorreu um erro ao deletar o produto');
             }
             return redirect()->back();
         } catch (Exception $error) {
             return redirect()->back()->withErrors(['products', 'Ocorreu um erro ao deletar o produto']);
+        }
+    }
+
+    public function update(Products $product, Request $req)
+    {
+
+        $req->validate(
+            [
+                'name' => 'unique:products,id,' . $product['id'],
+                'description' => 'min:2',
+                'prince' => 'numeric|min:0,01',
+                'image' => 'image',
+                'category' => 'required'
+            ],
+            [
+                'name' => ['unique' => 'Esse nome já está em uso'],
+                'description' => 'Descrição inválida',
+                'prince' => 'numeric|min:0,01',
+                'image' => 'Imagem inválida',
+                'category' => 'Categoria é obrigatoria'
+            ]
+        );
+        try {
+            $newProducts = $req->all();
+            $newProducts['name'] = strtolower($newProducts['name']);
+            if ($req->image) {
+                $product['image'] = Image::update($product['image'], $newProducts['name'], $req);
+            }
+            $productUpdate =  $product->update($req->all());
+            if (!$productUpdate) {
+                throw new Exception('Ocorreu um erro ao atualizar o produto');
+            }
+            return redirect()->back();
+        } catch (Exception $error) {
+            return redirect()->back()->withErrors(['products', $error->getMessage()]);
         }
     }
 }
