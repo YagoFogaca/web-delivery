@@ -3,8 +3,9 @@
 @section('content')
     <section class="container-form-create">
         <h4 style="text-align: center">Editar o produto</h4>
-        <form class="row g-3" method="POST" {{-- action={{ route('products.edit') }} --}} enctype="multipart/form-data">
-            @method('PUT')
+        <form class="row g-3" method="POST" action={{ route('products.update', ['product' => $product['id']]) }}
+            enctype="multipart/form-data">
+            @method('PATCH')
 
             @error('update')
                 <div class='invalid-feedback'><span>{{ $message }}</span></div>

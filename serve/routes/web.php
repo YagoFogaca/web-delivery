@@ -27,6 +27,7 @@ Route::controller(StoreController::class)->group(function () {
 Route::controller(ProductsController::class)->group(function () {
     Route::post('/create', 'create')->name('products.store');
     Route::delete('/delete/{id}', 'delete')->name('products.delete');
+    Route::patch('/patch/{product}', 'update')->name('products.update');
 });
 
 Route::controller(PlatformController::class)->group(function () {
