@@ -37,7 +37,7 @@
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item" href='#'>Segurança</a>
+                        <li><a class="dropdown-item" href={{ route('platform.security.store') }}>Segurança</a>
                         </li>
                     </ul>
                 </li>

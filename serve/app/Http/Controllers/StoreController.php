@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class StoreController extends Controller
 {
@@ -55,6 +56,28 @@ class StoreController extends Controller
                 throw new Exception('Contato não foi atualizado');
             }
             return redirect()->back()->with('contact', 'Informações de contato atualizadas com sucesso');
+        } catch (Exception $error) {
+            return redirect()->back()->withErrors(['error' => $error->getMessage()]);
+        }
+    }
+
+    public function security(Store $store, Request $req)
+    {
+        $req->validate(
+            [
+                'password' => 'required|min:8|confirmed',
+            ],
+            [
+                'password' => ['confirmed' => 'As senha não são iguais']
+            ]
+        );
+        try {
+            $password = ['password' => Hash::make($req->input('password'))];
+            $passwordUpdated = $store->update($password);
+            if (!$passwordUpdated) {
+                throw new Exception('Senha não foi atualizada');
+            }
+            return redirect()->back()->with('password', 'Senha atualizada com sucesso');
         } catch (Exception $error) {
             return redirect()->back()->withErrors(['error' => $error->getMessage()]);
         }

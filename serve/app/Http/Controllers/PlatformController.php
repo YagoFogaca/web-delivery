@@ -42,4 +42,9 @@ class PlatformController extends Controller
     {
         return view('pages.edit-contact.index', ['store' => $store]);
     }
+
+    public function security()
+    {
+        return view('pages.store-security.index');
+    }
 }

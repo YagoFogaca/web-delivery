@@ -23,6 +23,7 @@ Route::get('/', function () {
 Route::controller(StoreController::class)->group(function () {
     Route::post('/store-auth', 'auth')->name('store.auth');
     Route::patch('/patch/{store}', 'contact')->name('store.contact.update');
+    Route::patch('/security/{store}', 'security')->name('store.security.update');
 });
 
 Route::controller(ProductsController::class)->group(function () {
@@ -38,4 +39,5 @@ Route::controller(PlatformController::class)->group(function () {
     Route::get('/create-products', 'store')->name('platform.create.products');
     Route::get('/products/{product}/edit/', 'edit')->name('platform.edit.products');
     Route::get('/store-contact/{store}/edit', 'editContact')->name('platform.edit.contact');
+    Route::get('/store-security', 'security')->name('platform.security.store');
 });
