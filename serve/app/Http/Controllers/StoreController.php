@@ -82,4 +82,29 @@ class StoreController extends Controller
             return redirect()->back()->withErrors(['error' => $error->getMessage()]);
         }
     }
+
+    public function address(Store $store, Request $req)
+    {
+        $req->validate([
+            'cep' => 'required|min:8|max:8',
+            'state' => 'required',
+            'city' => 'required',
+            'district' => 'required',
+            'street' => 'required',
+            'number_address' => 'required|numeric',
+            'complement' => 'nullable',
+        ]);
+
+        try {
+            $address = $req->all();
+            $addressUpdated = $store->update($address);
+            if (!$addressUpdated) {
+                throw new Exception('Endereço atualizado com sucesso');
+            }
+
+            return redirect()->back()->with('address', 'Endereço atualizado com sucesso');
+        } catch (Exception $error) {
+            return redirect()->back()->withErrors(['error' => $error->getMessage()]);
+        }
+    }
 }

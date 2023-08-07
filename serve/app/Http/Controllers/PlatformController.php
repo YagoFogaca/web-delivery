@@ -47,4 +47,9 @@ class PlatformController extends Controller
     {
         return view('pages.store-security.index');
     }
+
+    public function address(Store $store)
+    {
+        return view('pages.store-address.index', ['store' => $store]);
+    }
 }

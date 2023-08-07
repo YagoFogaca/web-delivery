@@ -15,6 +15,11 @@ class Store extends Authenticatable
         'telephone',
         'cep',
         'number_address',
-        'shop_open'
+        'shop_open',
+        'state',
+        'city',
+        'district',
+        'street',
+        'complement',
     ];
 }

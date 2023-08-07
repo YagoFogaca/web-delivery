@@ -32,7 +32,9 @@
                         <li><a class="dropdown-item"
                                 href={{ route('platform.edit.contact', ['store' => Auth::guard('store')->user()->id]) }}>Contato</a>
                         </li>
-                        <li><a class="dropdown-item" href="#">Endereço</a></li>
+                        <li><a class="dropdown-item"
+                                href={{ route('platform.address.store', ['store' => Auth::guard('store')->user()->id]) }}>Endereço</a>
+                        </li>
                         <li><a class="dropdown-item" href="#">Horario de Funcionamento</a></li>
                         <li>
                             <hr class="dropdown-divider">
