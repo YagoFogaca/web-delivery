@@ -23,8 +23,23 @@
                     <a class="nav-link" href="#">Pedidos</a>
                 </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Conta</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Conta
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item"
+                                href={{ route('platform.edit.contact', ['store' => Auth::guard('store')->user()->id]) }}>Contato</a>
+                        </li>
+                        <li><a class="dropdown-item" href="#">Endereço</a></li>
+                        <li><a class="dropdown-item" href="#">Horario de Funcionamento</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href='#'>Segurança</a>
+                        </li>
+                    </ul>
                 </li>
 
                 <li class="nav-item">

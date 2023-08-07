@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Products;
+use App\Models\Store;
 use Illuminate\Http\Request;
 
 class PlatformController extends Controller
@@ -35,5 +36,10 @@ class PlatformController extends Controller
     {
         $categories = Category::with('products')->get();
         return view('pages.edit-products.index', ['product' => $product->toArray(), 'categories' => $categories]);
+    }
+
+    public function editContact(Store $store)
+    {
+        return view('pages.edit-contact.index', ['store' => $store]);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Store;
 use Exception;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -36,6 +37,26 @@ class StoreController extends Controller
             return redirect()->route('platform.index');
         } catch (Exception $error) {
             return redirect()->back()->withErrors(['auth' => $error->getMessage()]);
+        }
+    }
+
+    public function contact(Store $store, Request $req)
+    {
+        $req->validate(
+            [
+                'email' => 'nullable|email',
+                'telephone' => 'nullable|min:11'
+            ]
+        );
+        try {
+            $contact = $req->all();
+            $storeContact = $store->update($contact);
+            if (!$storeContact) {
+                throw new Exception('Contato não foi atualizado');
+            }
+            return redirect()->back()->with('contact', 'Informações de contato atualizadas com sucesso');
+        } catch (Exception $error) {
+            return redirect()->back()->withErrors(['error' => $error->getMessage()]);
         }
     }
 }
