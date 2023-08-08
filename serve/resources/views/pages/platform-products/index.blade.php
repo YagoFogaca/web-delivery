@@ -41,10 +41,25 @@
                     <div class="card" style="max-width: 485px;">
                         <img src={{ url('storage/' . $product['image']) }} class="card-img-top" alt="Imagem do produto">
                         <div class="card-body">
-                            <h5 class="card-title">{{ $product['name'] }}</h5>
-                            <p class="card-text">R$ {{ $product['prince'] }}</p>
-                            <p class="card-text">{{ $product['description'] }}</p>
-                            <p class="card-text">{{ $product['category']['name'] }}</p>
+                            <div class="d-flex justify-content-between">
+                                <h5 class="card-title">{{ $product['name'] }}</h5>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" role="switch"
+                                        id="flexSwitchCheckDefault">
+                                    <label class="form-check-label" for="flexSwitchCheckDefault">Ativo</label>
+                                </div>
+                            </div>
+
+                            <div class="d-flex justify-content-between">
+                                <p class="card-text">R$ {{ $product['prince'] }}</p>
+                                <p class="card-text">Categoria: {{ $product['category']['name'] }}</p>
+                            </div>
+
+                            <div class="mb-3">
+                                <p class="card-text">Descrição</p>
+                                <p class="card-text">{{ $product['description'] }}</p>
+                            </div>
+
                             <div class="d-grid gap-2">
                                 <a href={{ route('platform.edit.products', ['product' => $product['id']]) }}
                                     class="btn btn-warning">Editar</a>
