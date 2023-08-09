@@ -102,7 +102,6 @@ class ProductsController extends Controller
     public function active(Products $product, Request $req)
     {
         try {
-            throw new Exception('Erro ao ativar/devativar o produto');
             $productActive = $req->all();
             $productAcitveUpdated = $product->update(['active' => $productActive['active']]);
             if (!$productAcitveUpdated) {
