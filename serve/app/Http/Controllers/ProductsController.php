@@ -6,7 +6,6 @@ use App\Models\Products;
 use App\Utils\Image\Image;
 use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class ProductsController extends Controller
 {
@@ -97,6 +96,21 @@ class ProductsController extends Controller
             return redirect()->back();
         } catch (Exception $error) {
             return redirect()->back()->withErrors(['products', $error->getMessage()]);
+        }
+    }
+
+    public function active(Products $product, Request $req)
+    {
+        try {
+            throw new Exception('Erro ao ativar/devativar o produto');
+            $productActive = $req->all();
+            $productAcitveUpdated = $product->update(['active' => $productActive['active']]);
+            if (!$productAcitveUpdated) {
+                throw new Exception('Erro ao ativar/devativar o produto');
+            }
+            return response()->json($product, 200);
+        } catch (Exception $error) {
+            return response()->json(['mensage' => $error->getMessage(), 'status_code' => 404], 404);
         }
     }
 }

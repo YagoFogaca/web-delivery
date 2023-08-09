@@ -35,6 +35,7 @@
             <div class="container-products--infos">
                 <h4>Produtos</h4>
                 <a href={{ route('platform.create.products') }} class="btn btn-outline-primary">Criar produto</a>
+                <a href="#">Teste</a>
             </div>
             <article class="cards-products">
                 @foreach ($products as $product)
@@ -43,11 +44,12 @@
                         <div class="card-body">
                             <div class="d-flex justify-content-between">
                                 <h5 class="card-title">{{ $product['name'] }}</h5>
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" role="switch"
-                                        id="flexSwitchCheckDefault">
-                                    <label class="form-check-label" for="flexSwitchCheckDefault">Ativo</label>
-                                </div>
+                                <form class="form-check form-switch">
+                                    <input class="form-check-input active-product" type="checkbox" name="active"
+                                        role="switch" id="active" {{ $product['active'] ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="active">Ativo</label>
+                                    <input type="hidden" name="id" class="id" value='{{ $product['id'] }}'>
+                                </form>
                             </div>
 
                             <div class="d-flex justify-content-between">
