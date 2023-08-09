@@ -35,7 +35,6 @@
             <div class="container-products--infos">
                 <h4>Produtos</h4>
                 <a href={{ route('platform.create.products') }} class="btn btn-outline-primary">Criar produto</a>
-                <a href="#">Teste</a>
             </div>
             <article class="cards-products">
                 @foreach ($products as $product)
