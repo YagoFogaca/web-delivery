@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\OpenHours;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\PlatformController;
@@ -31,7 +32,10 @@ Route::controller(ProductsController::class)->group(function () {
     Route::post('/create', 'create')->name('products.store');
     Route::delete('/delete/{id}', 'delete')->name('products.delete');
     Route::patch('/patch/{product}', 'update')->name('products.update');
-    // Route::patch('/active/{product}', 'active')->name('store.active.update');
+});
+
+Route::controller(OpenHours::class)->group(function () {
+    Route::put('/open-hours', 'update')->name('hours.update');
 });
 
 Route::controller(PlatformController::class)->group(function () {
@@ -43,4 +47,5 @@ Route::controller(PlatformController::class)->group(function () {
     Route::get('/store-contact/{store}/edit', 'editContact')->name('platform.edit.contact');
     Route::get('/store-security', 'security')->name('platform.security.store');
     Route::get('/store-address/{store}/edit', 'address')->name('platform.address.store');
+    Route::get('/store-open-hours/edit', 'indexOpenHours')->name('platform.open-hours.store');
 });

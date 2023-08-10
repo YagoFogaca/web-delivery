@@ -24,6 +24,7 @@
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <script src={{ asset('assets/js/api-via-cep.js') }}></script>
     <script src={{ asset('assets/js/active-products.js') }}></script>
+    <script src={{ asset('assets/js/open-hours.js') }}></script>
 </body>
 
 </html>

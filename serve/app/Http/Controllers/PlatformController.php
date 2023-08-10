@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\OpenHours;
 use App\Models\Products;
 use App\Models\Store;
 use Illuminate\Http\Request;
@@ -51,5 +52,11 @@ class PlatformController extends Controller
     public function address(Store $store)
     {
         return view('pages.store-address.index', ['store' => $store]);
+    }
+
+    public function indexOpenHours()
+    {
+        $openHours = OpenHours::all()->toArray();
+        return view('pages.open-hours.index', ['open_hours' => $openHours]);
     }
 }

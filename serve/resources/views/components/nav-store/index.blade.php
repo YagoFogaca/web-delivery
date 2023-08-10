@@ -35,7 +35,8 @@
                         <li><a class="dropdown-item"
                                 href={{ route('platform.address.store', ['store' => Auth::guard('store')->user()->id]) }}>Endereço</a>
                         </li>
-                        <li><a class="dropdown-item" href="#">Horario de Funcionamento</a></li>
+                        <li><a class="dropdown-item" href={{ route('platform.open-hours.store') }}>Horario de
+                                Funcionamento</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
