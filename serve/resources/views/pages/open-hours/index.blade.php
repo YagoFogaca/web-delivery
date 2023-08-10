@@ -3,7 +3,7 @@
 @section('content')
     <section class="container-form-create">
         <h4 style="text-align: center">Editar o horario de funcionamento</h4>
-        <form>
+        <form name='form-open-hours'>
             @method('PUT')
             @csrf
             <article class="cards-open-hours">

@@ -1,4 +1,4 @@
-$("form").submit(function (event) {
+$("[name=form-open-hours]").submit(function (event) {
     event.preventDefault();
 
     const daysOfWeek = ["seg", "ter", "qua", "qui", "sex", "sab", "dom"];
