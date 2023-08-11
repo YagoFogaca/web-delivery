@@ -20,6 +20,11 @@ class PlatformController extends Controller
         return view('pages.platform-home.index');
     }
 
+    public function home()
+    {
+        return view('pages.menu.index');
+    }
+
     public function products()
     {
         $categories = Category::with('products')->get();
