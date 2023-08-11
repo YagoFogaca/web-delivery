@@ -1,0 +1,122 @@
+.main-container {
+    min-height: calc(100vh - 35px);
+    width: 100%;
+    max-width: 1200px;
+
+    margin: 35px auto 0;
+}
+
+section.card-infos-restaurant {
+    width: 90%;
+    margin: 0 auto;
+    box-shadow: 0px 0px 5px #00000045;
+    border-radius: 6px;
+    padding: 5px 10px;
+    border: 1px solid #d8d0d0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+section.variant {
+    margin-top: 15px;
+    align-items: stretch;
+    gap: 10px;
+}
+
+.card-img-logo {
+    width: 85px;
+    height: 85px;
+    background-color: #fff;
+}
+
+img.img-logo {
+    width: 75px;
+}
+
+.infos {
+    width: 100%;
+    text-align: center;
+}
+
+.bi-send-fill {
+    color: #f86f03;
+}
+
+.check-open {
+    color: #0e9e01;
+}
+
+.bi-check-circle-fill {
+    color: #17f803;
+}
+
+.check-closed {
+    color: #9e0e01;
+}
+
+.bi-x-circle-fill {
+    color: #f83403;
+}
+
+.embla {
+    overflow: hidden;
+}
+.embla__container {
+    display: flex;
+}
+.embla__slide {
+    flex-shrink: 0;
+    min-width: 0;
+    margin-right: 15px;
+}
+
+.embla__container .btn-primary {
+    background-color: #f86f03;
+    color: #eeeded;
+    border: #f86f03;
+    transition: all 300ms ease-in;
+}
+
+.embla__container .btn-primary:hover {
+    opacity: 0.8;
+}
+
+header.navbar-restaurant {
+    width: 100%;
+    background-color: #f86f03;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}
+
+section.navbar-options {
+    width: 90%;
+    margin: 0 auto;
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+
+section.navbar-options .btn {
+    font-size: 22px;
+}
+
+section.cards-products {
+    width: 90%;
+    margin: 15px auto 5px;
+
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-content: center;
+    gap: 15px;
+    padding-bottom: 57px;
+}
+
+@media (min-width: 767px) {
+    .card {
+        max-width: 325px;
+    }
+}

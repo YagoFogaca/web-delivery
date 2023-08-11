@@ -6,7 +6,6 @@ use App\Models\Category;
 use App\Models\OpenHours;
 use App\Models\Products;
 use App\Models\Store;
-use Illuminate\Http\Request;
 
 class PlatformController extends Controller
 {
@@ -22,7 +21,13 @@ class PlatformController extends Controller
 
     public function home()
     {
-        return view('pages.menu.index');
+        $store = Store::all()->toArray();
+        $hours = OpenHours::all()->toArray();
+        $categories = Category::with('products')->get();
+        $products = Products::with('category')->get()->toArray();
+        $day = date("N");
+        $store[0]['hour'] = $hours[(int)$day - 1];
+        return view('pages.menu.index', ['store' => $store[0], 'categories' => $categories, 'products' => $products]);
     }
 
     public function products()
