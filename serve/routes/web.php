@@ -8,30 +8,30 @@ use Illuminate\Support\Facades\Route;
 
 Route::controller(StoreController::class)->group(function () {
     Route::post('/store-auth', 'auth')->name('store.auth');
-    Route::patch('/patch/{store}', 'contact')->name('store.contact.update');
-    Route::patch('/security/{store}', 'security')->name('store.security.update');
-    Route::put('/address/{store}', 'address')->name('store.address.update');
+    Route::patch('/patch/{store}', 'contact')->middleware('auth.store:store')->name('store.contact.update');
+    Route::patch('/security/{store}', 'security')->middleware('auth.store:store')->name('store.security.update');
+    Route::put('/address/{store}', 'address')->middleware('auth.store:store')->name('store.address.update');
 });
 
 Route::controller(ProductsController::class)->group(function () {
-    Route::post('/create', 'create')->name('products.store');
-    Route::delete('/delete/{id}', 'delete')->name('products.delete');
-    Route::patch('/patch-product/{product}', 'update')->name('products.update');
+    Route::post('/create', 'create')->middleware('auth.store:store')->name('products.store');
+    Route::delete('/delete/{id}', 'delete')->middleware('auth.store:store')->name('products.delete');
+    Route::patch('/patch-product/{product}', 'update')->middleware('auth.store:store')->name('products.update');
 });
 
 Route::controller(OpenHours::class)->group(function () {
-    Route::put('/open-hours', 'update')->name('hours.update');
+    Route::put('/open-hours', 'update')->middleware('auth.store:store')->name('hours.update');
 });
 
 Route::controller(PlatformController::class)->group(function () {
     Route::get('/', 'home')->name('menu.home');
     Route::get('/store-auth', 'login')->name('store.login');
-    Route::get('/platform-store', 'index')->name('platform.index');
-    Route::get('/platform-products', 'products')->name('platform.products');
-    Route::get('/create-products', 'store')->name('platform.create.products');
-    Route::get('/products/{product}/edit/', 'edit')->name('platform.edit.products');
-    Route::get('/store-contact/{store}/edit', 'editContact')->name('platform.edit.contact');
-    Route::get('/store-security', 'security')->name('platform.security.store');
-    Route::get('/store-address/{store}/edit', 'address')->name('platform.address.store');
-    Route::get('/store-open-hours/edit', 'indexOpenHours')->name('platform.open-hours.store');
+    Route::get('/platform-store', 'index')->middleware('auth.store:store')->name('platform.index');
+    Route::get('/platform-products', 'products')->middleware('auth.store:store')->name('platform.products');
+    Route::get('/create-products', 'store')->middleware('auth.store:store')->name('platform.create.products');
+    Route::get('/products/{product}/edit/', 'edit')->middleware('auth.store:store')->name('platform.edit.products');
+    Route::get('/store-contact/{store}/edit', 'editContact')->middleware('auth.store:store')->name('platform.edit.contact');
+    Route::get('/store-security', 'security')->middleware('auth.store:store')->name('platform.security.store');
+    Route::get('/store-address/{store}/edit', 'address')->middleware('auth.store:store')->name('platform.address.store');
+    Route::get('/store-open-hours/edit', 'indexOpenHours')->middleware('auth.store:store')->name('platform.open-hours.store');
 });
