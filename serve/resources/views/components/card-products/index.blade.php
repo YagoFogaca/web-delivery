@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card" id="{{ $product['id'] }}">
     <img src={{ url('storage/' . $product['image']) }} class="card-img-top" alt="Imagem do produto">
     <div class="card-body">
 
@@ -13,8 +13,9 @@
         </div>
 
         <div class="d-flex flex-row mb-3">
-            <a href={{ route('platform.edit.products', ['product' => $product['id']]) }} class="btn btn-warning"><i
-                    class="bi bi-bag-plus-fill"></i> Adicionar</a>
+            <button id="{{ $product['id'] }}" type="button" class="btn btn-warning" data-bs-toggle="modal"
+                data-bs-target="#product-{{ $product['id'] }}"><i class="bi bi-bag-plus-fill"></i>
+                Adicionar</button>
         </div>
     </div>
 </div>

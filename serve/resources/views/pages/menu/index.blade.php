@@ -53,6 +53,7 @@
     <section class="cards-products">
         @foreach ($products as $product)
             @include('components.card-products.index', ['product' => $product])
+            @include('components.modal-products.index', ['product' => $product])
         @endforeach
     </section>
 
