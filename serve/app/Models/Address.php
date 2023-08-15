@@ -16,6 +16,8 @@ class Address extends Model
         'district',
         'street',
         'number_address',
+        'user_id',
         'complement'
     ];
+    protected $table = 'address';
 }
