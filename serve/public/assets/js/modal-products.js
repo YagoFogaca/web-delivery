@@ -18,8 +18,10 @@ modals.forEach((modal) => {
         addQuantity.addEventListener("click", (event) => {
             quantity.textContent = quantityProducts.quantity + 1;
             quantityProducts.quantity++;
-            elementPrice.textContent =
-                quantityProducts.elementPrice + quantityProducts.priceProduct;
+
+            elementPrice.textContent = (
+                quantityProducts.elementPrice + quantityProducts.priceProduct
+            ).toFixed(2);
             quantityProducts.elementPrice += quantityProducts.priceProduct;
         });
 
@@ -27,9 +29,11 @@ modals.forEach((modal) => {
             if (quantityProducts.quantity > 1) {
                 quantity.textContent = quantityProducts.quantity - 1;
                 quantityProducts.quantity--;
-                elementPrice.textContent =
+
+                elementPrice.textContent = (
                     quantityProducts.elementPrice -
-                    quantityProducts.priceProduct;
+                    quantityProducts.priceProduct
+                ).toFixed(2);
                 quantityProducts.elementPrice -= quantityProducts.priceProduct;
             }
         });
