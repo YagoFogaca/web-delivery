@@ -8,7 +8,7 @@
                     <img src={{ asset('assets/imgs/banner.png') }} alt="Logo">
                 </a>
             </div>
-            <form method="POST" action={{ route('store.auth') }} class="form-login">
+            <form method="POST" action={{ route('user.store') }} class="form-login">
                 @error('error')
                     <div class='invalid-feedback'><span>{{ $message }}</span></div>
                 @enderror
@@ -42,10 +42,10 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="tel" class="form-label">Telefone (WhatsApp)</label>
-                    <input type="tel" class="form-control" id="tel" name="tel" placeholder="(xx) xxxxx-xxxx"
+                    <label for="telephone" class="form-label">Telefone (WhatsApp)</label>
+                    <input type="tel" class="form-control" id="telephone" name="telephone" placeholder="(xx) xxxxx-xxxx"
                         required>
-                    @error('tel')
+                    @error('telephone')
                         <div class='invalid-feedback'><span>{{ $message }}</span></div>
                     @enderror
                 </div>
