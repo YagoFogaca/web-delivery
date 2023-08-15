@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\OpenHours;
 use App\Models\Products;
 use App\Models\Store;
+use App\Models\User;
 
 class PlatformController extends Controller
 {
@@ -17,6 +18,11 @@ class PlatformController extends Controller
     public function userLogin()
     {
         return view('pages.login-user.index');
+    }
+
+    public function userAddress()
+    {
+        return view('pages.user-address.index');
     }
 
     public function create()

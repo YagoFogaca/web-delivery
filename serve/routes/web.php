@@ -4,6 +4,8 @@ use App\Http\Controllers\OpenHours;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\PlatformController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AddressController;
 use Illuminate\Support\Facades\Route;
 
 Route::controller(StoreController::class)->group(function () {
@@ -19,6 +21,15 @@ Route::controller(ProductsController::class)->group(function () {
     Route::patch('/patch-product/{product}', 'update')->middleware('auth.store:store')->name('products.update');
 });
 
+Route::controller(UserController::class)->group(function () {
+    Route::post('/user', 'store')->name('user.store');
+    Route::post('/login', 'auth')->name('user.auth');
+});
+
+Route::controller(AddressController::class)->group(function () {
+    Route::post('/create', 'create')->name('user.create.address');
+});
+
 Route::controller(OpenHours::class)->group(function () {
     Route::put('/open-hours', 'update')->middleware('auth.store:store')->name('hours.update');
 });
@@ -27,6 +38,7 @@ Route::controller(PlatformController::class)->group(function () {
     Route::get('/', 'home')->name('menu.home');
     Route::get('/login', 'userLogin')->name('login');
     Route::get('/user/create', 'create')->name('user.create');
+    Route::get('/user/address', 'userAddress')->name('user.address');
     Route::get('/store-auth', 'login')->name('store.login');
     Route::get('/platform-store', 'index')->middleware('auth.store:store')->name('platform.index');
     Route::get('/platform-products', 'products')->middleware('auth.store:store')->name('platform.products');
