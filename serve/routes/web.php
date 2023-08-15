@@ -25,6 +25,8 @@ Route::controller(OpenHours::class)->group(function () {
 
 Route::controller(PlatformController::class)->group(function () {
     Route::get('/', 'home')->name('menu.home');
+    Route::get('/login', 'userLogin')->name('login');
+    Route::get('/user/create', 'create')->name('user.create');
     Route::get('/store-auth', 'login')->name('store.login');
     Route::get('/platform-store', 'index')->middleware('auth.store:store')->name('platform.index');
     Route::get('/platform-products', 'products')->middleware('auth.store:store')->name('platform.products');

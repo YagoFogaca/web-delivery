@@ -1,8 +1,8 @@
 <header class="navbar-restaurant">
     <section class="navbar-options">
-        <button class="btn">
+        <a href={{ route('login') }} class="btn">
             <i class="bi bi-person-fill"></i>
-        </button>
+        </a>
         <button class="btn">
             <i class="bi bi-bag-fill"></i>
         </button>

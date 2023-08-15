@@ -14,6 +14,16 @@ class PlatformController extends Controller
         return view('pages.login-store.index');
     }
 
+    public function userLogin()
+    {
+        return view('pages.login-user.index');
+    }
+
+    public function create()
+    {
+        return view('pages.create-account.index');
+    }
+
     public function index()
     {
         return view('pages.platform-home.index');
