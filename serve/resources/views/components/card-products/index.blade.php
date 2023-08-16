@@ -1,5 +1,5 @@
 <div class="card" id="{{ $product['id'] }}">
-    <img src={{ url('storage/' . $product['image']) }} class="card-img-top" alt="Imagem do produto">
+    <img src={{ url('storage/' . $product['image']) }} class="card-img-top img-products" alt="Imagem do produto">
     <div class="card-body">
 
         <div class="d-flex justify-content-between">
@@ -9,7 +9,7 @@
 
         <div class="mb-3">
             <p class="card-text">Descrição</p>
-            <p class="card-text">{{ $product['description'] }}</p>
+            <p class="card-text description">{{ $product['description'] }}</p>
         </div>
 
         <div class="d-flex flex-row mb-3">

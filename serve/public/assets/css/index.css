@@ -111,6 +111,13 @@
     height: 350px;
 }
 
+p.description {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+}
+
 .container-form-create {
     width: 50%;
     margin: 10px auto;

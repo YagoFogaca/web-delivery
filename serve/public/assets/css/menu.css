@@ -63,9 +63,11 @@ img.img-logo {
 .embla {
     overflow: hidden;
 }
+
 .embla__container {
     display: flex;
 }
+
 .embla__slide {
     flex-shrink: 0;
     min-width: 0;
@@ -103,16 +105,41 @@ section.navbar-options .btn {
     font-size: 22px;
 }
 
-section.cards-products {
+section.container-products {
     width: 90%;
     margin: 15px auto 5px;
+    padding-bottom: 57px;
+}
 
+section.cards-products {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
     align-content: center;
     gap: 15px;
-    padding-bottom: 57px;
+}
+
+.container-products--infos {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 30px;
+
+    width: fit-content;
+    /* margin-bottom: 20px; */
+    margin: 35px 0px 20px;
+}
+
+.container-products--infos h4 {
+    margin: 0;
+    text-transform: capitalize;
+}
+
+p.description {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
 }
 
 .modal-dialog {
@@ -128,6 +155,12 @@ section.cards-products {
 .modal-content label {
     color: #4a4a4a;
     font-weight: 700;
+}
+
+.img-products {
+    max-height: 215px;
+    min-height: 200px;
+    object-fit: cover;
 }
 
 .modal-footer {
@@ -160,6 +193,10 @@ section.cards-products {
 
 .modal-footer .btn-primary:hover {
     opacity: 0.8;
+}
+
+.card {
+    width: 100%;
 }
 
 @media (min-width: 767px) {

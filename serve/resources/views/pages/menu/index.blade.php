@@ -36,24 +36,28 @@
                     <div class="embla__container">
                         @foreach ($categories as $category)
                             <div class="embla__slide">
-                                <button class="btn btn-primary">{{ $category->name }}</button>
+                                <a href="#{{ $category['name'] }}" class="btn btn-primary">{{ $category['name'] }}</a>
                             </div>
                         @endforeach
                     </div>
                 </div>
             </div>
         </section>
-
-        <form role="search">
-            <input class="form-control form-control-sm" type="search" placeholder="Busque por produtos"
-                aria-label="Search">
-        </form>
     </section>
 
-    <section class="cards-products">
-        @foreach ($products as $product)
-            @include('components.card-products.index', ['product' => $product])
-            @include('components.modal-products.index', ['product' => $product])
+    <section class="container-products">
+
+        @foreach ($categories as $category)
+            <div class="container-products--infos">
+                <h4 id="{{ $category['name'] }}">{{ $category['name'] }}</h4>
+            </div>
+
+            <section class="cards-products">
+                @foreach ($category['products'] as $product)
+                    @include('components.card-products.index', ['product' => $product])
+                    @include('components.modal-products.index', ['product' => $product])
+                @endforeach
+            </section>
         @endforeach
     </section>
 
