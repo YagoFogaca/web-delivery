@@ -16,7 +16,7 @@ Route::controller(StoreController::class)->group(function () {
 });
 
 Route::controller(ProductsController::class)->group(function () {
-    Route::post('/create', 'create')->middleware('auth.store:store')->name('products.store');
+    Route::post('/product', 'create')->middleware('auth.store:store')->name('products.store');
     Route::delete('/delete/{id}', 'delete')->middleware('auth.store:store')->name('products.delete');
     Route::patch('/patch-product/{product}', 'update')->middleware('auth.store:store')->name('products.update');
 });
@@ -27,7 +27,7 @@ Route::controller(UserController::class)->group(function () {
 });
 
 Route::controller(AddressController::class)->group(function () {
-    Route::post('/create', 'create')->name('user.create.address');
+    Route::post('/address', 'create')->name('user.create.address');
 });
 
 Route::controller(OpenHours::class)->group(function () {
