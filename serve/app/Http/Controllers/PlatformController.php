@@ -39,7 +39,7 @@ class PlatformController extends Controller
     {
         $store = Store::all()->toArray();
         $hours = OpenHours::all()->toArray();
-        $categories = Category::with('products')->get();
+        $categories = Category::with('products')->get()->toArray();
         $products = Products::with('category')->get()->toArray();
         $day = date("N");
         $store[0]['hour'] = $hours[(int)$day - 1];

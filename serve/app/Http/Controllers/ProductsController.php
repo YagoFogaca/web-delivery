@@ -30,15 +30,14 @@ class ProductsController extends Controller
         );
 
         try {
-            $product = $req->all();
             $product = [
-                'name' => strtolower($req->input('name')),
+                'name' => $req->input('name'),
                 'prince' => $req->input('price'),
-                'description' => strtolower($req->input('description')),
+                'description' => $req->input('description'),
                 'image' => $req->image,
                 'category_id' => intval($req->input('category'))
             ];
-            $product['image'] = Image::save($product['name'], $req);
+            $product['image'] = Image::save(strtolower($product['name']), $req);
             $modelProducts = Products::create($product);
             if (!$modelProducts) {
                 throw new Exception('Ocorreu um erro ao criar o produto');
