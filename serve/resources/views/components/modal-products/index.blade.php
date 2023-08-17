@@ -24,36 +24,46 @@
                         <p id="description-products" class="card-text">{{ $product['description'] }}</p>
                     </div>
                 </div>
-
-
-
-                <div class="d-flex flex-column mb-3">
-                    <div class="mb-3">
-                        <label for="observation" class="form-label">Alguma observação?</label>
-                        <textarea class="form-control" id="observation" rows="2" placeholder="Sem salada, sem molho etc..."></textarea>
-                    </div>
-                </div>
-
             </div>
 
             <div class="modal-footer">
-                <div class="input-group">
-                    <span class="input-group-text" id="remove-quantity-{{ $product['id'] }}">
-                        <i class="bi bi-dash"></i>
-                    </span>
-                    <span class="form-control" id="quantity-{{ $product['id'] }}">1</span>
-                    <span class="input-group-text" id="add-quantity-{{ $product['id'] }}">
-                        <i class="bi bi-plus-lg"></i>
-                    </span>
-                </div>
 
-                <button type="button" class="btn btn-primary">
-                    <i class="bi bi-bag-fill"></i> Adicionar
-                    <span>R$</span>
-                    <span id="prince-demand-{{ $product['id'] }}">
-                        {{ $product['prince'] }}
-                    </span>
-                </button>
+                <form action="{{ route('item.bag.store') }}" method="POST" class="d-flex flex-column mb-3">
+                    @csrf
+                    <div class="d-flex flex-column mb-3" style="width: 100%;">
+                        <div class="mb-3">
+                            <label for="observation" class="form-label">Alguma observação?</label>
+                            <textarea name="observation" class="form-control" id="observation" rows="2"
+                                placeholder="Sem salada, sem molho etc..."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                        <div class="input-group">
+                            <span class="input-group-text" id="remove-quantity-{{ $product['id'] }}">
+                                <i class="bi bi-dash"></i>
+                            </span>
+                            <input class="form-control" id="quantity-{{ $product['id'] }}" value="1"
+                                style="padding: 0; text-align: center;" name="amount" />
+                            <span class="input-group-text" id="add-quantity-{{ $product['id'] }}">
+                                <i class="bi bi-plus-lg"></i>
+                            </span>
+                        </div>
+
+                        <input type="hidden" name="product_id" id="product_id" value="{{ $product['id'] }}">
+                        <input type="hidden" name="price" id="price-item-{{ $product['id'] }}"
+                            value="{{ $product['prince'] }}">
+
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-bag-fill"></i> Adicionar
+                            <span>R$</span>
+                            <span id="prince-demand-{{ $product['id'] }}">
+                                {{ $product['prince'] }}
+                            </span>
+                        </button>
+                    </div>
+                </form>
+
             </div>
         </div>
     </div>

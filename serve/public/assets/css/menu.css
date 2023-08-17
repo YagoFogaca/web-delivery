@@ -175,10 +175,6 @@ p.description {
     padding: 5px;
 }
 
-.modal-footer .form-control {
-    text-align: center;
-}
-
 .modal-footer .bi-dash,
 .bi-plus-lg {
     color: #f86f03;

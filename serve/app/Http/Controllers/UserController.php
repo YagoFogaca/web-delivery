@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\ShoppingBag;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -42,6 +43,7 @@ class UserController extends Controller
             }
 
             Auth::attempt(['email' => $req->input('email'), 'password' => $req->input('password')]);
+            ShoppingBag::create(['user_id' => Auth::id(), 'price' => 0.00]);
 
             return redirect()->route('user.address')->with('auth', 'Conta criado com sucesso faça Login');
         } catch (Exception $error) {
