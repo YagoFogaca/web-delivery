@@ -1,4 +1,4 @@
-const modals = document.querySelectorAll(".modal");
+const modals = document.querySelectorAll(".modal-products");
 
 modals.forEach((modal) => {
     modal.addEventListener("shown.bs.modal", (event) => {
