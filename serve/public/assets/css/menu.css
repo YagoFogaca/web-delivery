@@ -232,6 +232,9 @@ div.card-products-items .input-group-text {
 .card-shopping-bag .modal-header {
     padding: 1rem 1rem;
     border-bottom: 1px solid #dee2e6;
+    position: sticky;
+    top: 0;
+    background-color: #fff;
 }
 
 .card-shopping-bag-footer {

@@ -13,7 +13,11 @@
                     <div class="d-flex justify-content-between">
                         <h5 class="card-title">{{ $item['product']['name'] }}</h5>
                         <div>
-                            <i class="bi bi-pencil-fill"></i>
+                            <button data-bs-toggle="modal" data-bs-target="#item-{{ $item['id'] }}"
+                                id="{{ $item['id'] }}" type="button"
+                                style="border: none; background: transparent; padding: 0;">
+                                <i class="bi bi-pencil-fill"></i>
+                            </button>
                             <a href="#" style="color: black">
                                 <i class="bi bi-trash-fill" style="color: red; margin-left: 5px"></i>
                             </a>
@@ -41,6 +45,8 @@
                         </p>
                     </div>
                 </div>
+
+                @include('components.modal-items-edit.index', $item)
             @endforeach
         </section>
 
