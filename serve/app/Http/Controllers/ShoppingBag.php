@@ -9,28 +9,16 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-
-
 class ShoppingBag extends Controller
 {
 
     public function index()
     {
-
-        $data = User::find(Auth::id());
-        $user = $data->toArray();
-        $sacola = $data->shoppingBag->toArray();
-        $itens = $data->shoppingBag->bagItem->toArray();
-
-        dd(
-            'User:',
-            $user,
-            "Sacola:",
-            $sacola,
-            'Itens:',
-            $itens
-        );
+        $shoppingBag = ModelShoppingBag::where('user_id', Auth::id())->with('bagItem')->first()->toArray();
+        $items = BagItem::where('shopping_bag_id', $shoppingBag['id'])->with('shoppingBag')->with('product')->get()->toArray();
+        return view('pages.shopping-bag.index', ['items' => $items, 'shoppingBag' => $shoppingBag]);
     }
+
     public function store(Request $req)
     {
 
@@ -59,33 +47,45 @@ class ShoppingBag extends Controller
         }
     }
 
-    public function removeItems(Request $req)
+    public function destroy(BagItem $bagItem)
     {
-        dd($req->all());
-        // Verificar se o usuario já tem uma sacola criada
-        // Fazer a diminuição do preço da sacola
-        // Deletar o Bag_itens
-        // Atualizar o preço da sacola
-        // retornar
+        try {
+            $shoppingBag = $bagItem->shoppingBag->toArray();
+            $newPriceShoppingBag = $shoppingBag['price'] - $bagItem->toArray()['price'];
+            $bagItemDeleted = $bagItem->delete();
+            if (!$bagItemDeleted) {
+                throw new Exception("Ocorreu um erro ao deletar o item do pedido");
+            }
+            ModelShoppingBag::where("user_id", Auth::id())->update(['price' => $newPriceShoppingBag]);
+            return redirect()->route('item.index');
+        } catch (Exception $error) {
+            return redirect()->back()->withErrors(['Error' => 'Ocorreu um erro ao deletar o item do pedido']);
+        }
     }
 
-    public function resetItems(Request $req)
+    public function update(BagItem $bagItem, Request $req)
     {
-        dd($req->all());
-        // Verificar se o usuario já tem uma sacola criada
-        // Fazer diminuição do preço da sacola
-        // Deletar todos os Bag_itens
-        // Atualizar o preço da sacola
-        // retornar
-    }
-
-    public function updateItems(Request $req, BagItem $bag_item)
-    {
-        dd($req->all());
-        // Verificar se o usuario já tem uma sacola criada
-        // Fazer diminuição do preço da sacola
-        // Deletar todos os Bag_itens
-        // Atualizar o preço da sacola
-        // retornar
+        try {
+            $newBagItem = $req->all();
+            $shoppingBag = $bagItem->shoppingBag->toArray();
+            if ($newBagItem['price'] !== $bagItem->toArray()['price']) {
+                if ($newBagItem['price'] > $bagItem['price']) {
+                    $priceDifference = $newBagItem['price'] - $bagItem['price'];
+                    $shoppingBag['price'] += $priceDifference;
+                    ModelShoppingBag::where("user_id", Auth::id())->update(['price' => $shoppingBag['price']]);
+                } else if ($newBagItem['price'] < $bagItem['price']) {
+                    $priceDifference = $bagItem['price'] - $newBagItem['price'];
+                    $shoppingBag['price'] -= $priceDifference;
+                    ModelShoppingBag::where("user_id", Auth::id())->update(['price' => $shoppingBag['price']]);
+                }
+            }
+            $bagItemUpdated = $bagItem->update($req->all());
+            if (!$bagItemUpdated) {
+                throw new Exception("Ocorreu um erro ao atualizar o item do pedido");
+            }
+            return redirect()->route('item.index');
+        } catch (Exception $error) {
+            return redirect()->back()->withErrors(['Error' => 'Ocorreu um erro ao atualizar o item do pedido']);
+        }
     }
 }

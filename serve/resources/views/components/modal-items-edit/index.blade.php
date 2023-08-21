@@ -6,34 +6,7 @@
             <div class="modal-header">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            {{-- [▼
-            "id" => 9
-            "shopping_bag_id" => 2
-            "product_id" => 27
-            "amount" => 1
-            "observation" => null
-            "price" => "15.90"
-            "created_at" => "2023-08-17T22:30:27.000000Z"
-            "updated_at" => "2023-08-17T22:30:27.000000Z"
-            "shopping_bag" => array:5 [▼
-              "id" => 2
-              "user_id" => 13
-              "price" => "65.80"
-              "created_at" => "2023-08-17T22:30:10.000000Z"
-              "updated_at" => "2023-08-17T22:31:49.000000Z"
-            ]
-            "product" => array:9 [▼
-              "id" => 27
-              "name" => "x-salada"
-              "description" => "o hambúrguer x-salada oferece uma abordagem mais leve e saudável, sendo uma excelente escolha para quem busca uma refeição equilibrada. ele apresenta um hambúrg ▶"
-              "image" => "products/x-salada.jpeg"
-              "created_at" => "2023-08-16T15:19:07.000000Z"
-              "updated_at" => "2023-08-16T15:19:07.000000Z"
-              "category_id" => 8
-              "active" => 1
-              "prince" => "15.90"
-            ]
-] --}}
+
             <div class="modal-body d-flex flex-column mb-3">
 
                 <div class="d-flex flex-column mb-3">
@@ -55,9 +28,10 @@
             </div>
 
             <div class="modal-footer">
-
-                <form action="{{ route('item.bag.store') }}" method="POST" class="d-flex flex-column mb-3">
+                <form action={{ route('item.update', ['bagItem' => $item['id']]) }} method="POST"
+                    class="d-flex flex-column mb-3">
                     @csrf
+                    @method('PATCH')
                     <div class="d-flex flex-column mb-3" style="width: 100%;">
                         <div class="mb-3">
                             <label for="observation" class="form-label">Alguma observação?</label>
@@ -78,9 +52,9 @@
                             </span>
                         </div>
 
-                        <input type="hidden" name="product_id" id="product_id" value="{{ $item['id'] }}">
+                        <input type="hidden" name="product_id" id="product_id" value="{{ $item['product']['id'] }}">
                         <input type="hidden" name="price" id="price-item-{{ $item['id'] }}"
-                            value="{{ $product['prince'] }}">
+                            value=" {{ $item['price'] }}">
 
                         <button type="submit" class="btn btn-primary">
                             <i class="bi bi-bag-fill"></i> Editar

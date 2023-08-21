@@ -38,6 +38,8 @@ Route::controller(OpenHours::class)->group(function () {
 Route::controller(ShoppingBag::class)->group(function () {
     Route::post('/item-bag', 'store')->middleware('auth')->name('item.bag.store');
     Route::get('/item-bag', 'index')->middleware('auth')->name('item.index');
+    Route::patch('/bag-item/{bagItem}', 'update')->middleware('auth')->name('item.update');
+    Route::delete('/delete-bag-item/{bagItem}', 'destroy')->middleware('auth')->name('item.destroy');
 });
 
 Route::controller(PlatformController::class)->group(function () {

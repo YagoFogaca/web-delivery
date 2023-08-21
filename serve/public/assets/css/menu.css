@@ -229,6 +229,14 @@ div.card-products-items .input-group-text {
     margin: 0 auto;
 }
 
+.card-products-config {
+    width: 20%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+}
+
 .card-shopping-bag .modal-header {
     padding: 1rem 1rem;
     border-bottom: 1px solid #dee2e6;
@@ -240,6 +248,7 @@ div.card-products-items .input-group-text {
 .card-shopping-bag-footer {
     position: fixed;
     bottom: 0;
+    left: 0;
     width: 100%;
 }
 
