@@ -62,4 +62,5 @@
     </section>
 
     @include('components.nav-restaurant.index')
+    @include('components.modal-shopping-bag.index', ['bagItems' => $bagItems])
 @endsection

@@ -195,6 +195,23 @@ p.description {
     width: 100%;
 }
 
+div.card-products-items {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    border-bottom: var(--bs-modal-header-border-width) solid
+        var(--bs-modal-header-border-color);
+    padding-bottom: 5px;
+}
+
+div.card-products-items .input-group {
+    width: 30%;
+}
+
+div.card-products-items .input-group-text {
+    padding: 5px;
+}
+
 @media (min-width: 767px) {
     .card {
         max-width: 325px;

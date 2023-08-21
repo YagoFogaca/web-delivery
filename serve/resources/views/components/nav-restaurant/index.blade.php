@@ -3,8 +3,8 @@
         <a href={{ route('login') }} class="btn">
             <i class="bi bi-person-fill"></i>
         </a>
-        <a class="btn" href={{ route('item.teste') }}>
+        <button class="btn" type="button" data-bs-toggle="modal" data-bs-target="#modal-shopping-bag">
             <i class="bi bi-bag-fill"></i>
-        </a>
+        </button>
     </section>
 </header>
