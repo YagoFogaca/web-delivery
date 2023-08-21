@@ -37,7 +37,7 @@ Route::controller(OpenHours::class)->group(function () {
 
 Route::controller(ShoppingBag::class)->group(function () {
     Route::post('/item-bag', 'store')->middleware('auth')->name('item.bag.store');
-    Route::get('/teste-sacola', 'index')->name('item.teste');
+    Route::get('/item-bag', 'index')->name('item.index');
 });
 
 Route::controller(PlatformController::class)->group(function () {

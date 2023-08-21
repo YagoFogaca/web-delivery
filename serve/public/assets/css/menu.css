@@ -195,13 +195,23 @@ p.description {
     width: 100%;
 }
 
+/* SACOLA DE PEDIDOS */
+
+main.shopping-bag {
+    margin: 0px auto;
+}
+
 div.card-products-items {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    border-bottom: var(--bs-modal-header-border-width) solid
-        var(--bs-modal-header-border-color);
-    padding-bottom: 5px;
+    border-bottom: 1px solid #dee2e6;
+    padding: 1rem 1rem;
+}
+
+.card-shopping-bag-body {
+    padding-bottom: 57px;
+    margin-bottom: 10px;
 }
 
 div.card-products-items .input-group {
@@ -210,6 +220,38 @@ div.card-products-items .input-group {
 
 div.card-products-items .input-group-text {
     padding: 5px;
+}
+
+.card-shopping-bag {
+    max-width: 800px;
+    width: 100%;
+    min-height: 300px;
+    margin: 0 auto;
+}
+
+.card-shopping-bag .modal-header {
+    padding: 1rem 1rem;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.card-shopping-bag-footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.card-shopping-bag-footer .btn-primary {
+    width: 100%;
+    border-radius: 0;
+    padding: 1rem 1rem;
+    background-color: #f86f03;
+    color: #eeeded;
+    border: #f86f03;
+    transition: all 300ms ease-in;
+}
+
+.card-shopping-bag-footer .btn-primary:hover {
+    opacity: 0.8;
 }
 
 @media (min-width: 767px) {
