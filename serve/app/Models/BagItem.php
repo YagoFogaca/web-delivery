@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class BagItem extends Model
 {
@@ -20,8 +20,13 @@ class BagItem extends Model
         'price'
     ];
 
-    public function shoppingBag(): HasOne
+    public function shoppingBag(): BelongsTo
     {
-        return $this->hasOne(ShoppingBag::class);
+        return $this->belongsTo(ShoppingBag::class);
+    }
+
+    public function product(): BelongsTo
+    {
+        return $this->belongsTo(Products::class);
     }
 }
