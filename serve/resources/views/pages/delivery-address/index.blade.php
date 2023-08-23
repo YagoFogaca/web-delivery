@@ -16,7 +16,7 @@
                 @foreach ($adresses as $address)
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="address" id="{{ $address['id'] }}"
-                            value="{{ $address['id'] }}">
+                            value="{{ $address['cep'] }}">
                         <label class="form-check-label" for="{{ $address['id'] }}">
                             <div>
                                 <p class="form-text">Entregar em</p>
@@ -33,7 +33,7 @@
 
                 <section class="card-shopping-bag-footer">
                     <div class="card-price">
-                        <p>Total entrega:</p> <span>RS12,90</span>
+                        <p>Total entrega:</p> <span>RS <span id="delivery-value">0</span>,00</span>
                     </div>
                     <button type="submit" class="btn btn-primary">Continuar</button>
                 </section>

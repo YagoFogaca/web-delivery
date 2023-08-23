@@ -47,6 +47,7 @@ Route::controller(ShoppingBag::class)->group(function () {
 Route::controller(OrderController::class)->group(function () {
     Route::get('/delivery-address', 'deliveryAddress')->middleware('auth')->name('address.order');
     Route::post('/delivery-address', 'create')->middleware('auth')->name('order.store');
+    Route::get('/delivery-value/{code}', 'deliveryValue')->middleware('auth')->name('order.delivery.value');
 });
 
 Route::controller(PlatformController::class)->group(function () {
