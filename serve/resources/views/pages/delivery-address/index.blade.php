@@ -35,7 +35,7 @@
                     <div class="card-price">
                         <p>Total entrega:</p> <span>RS <span id="delivery-value">0</span>,00</span>
                     </div>
-                    <button type="submit" class="btn btn-primary">Continuar</button>
+                    <button id="continue" type="submit" class="btn btn-primary" disabled>Continuar</button>
                 </section>
             </form>
         </section>

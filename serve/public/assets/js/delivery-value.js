@@ -1,5 +1,6 @@
 const radioInputs = document.querySelectorAll(".form-check-input");
 const spanPrice = document.getElementById("delivery-value");
+const btnContinue = document.getElementById("continue");
 
 radioInputs.forEach((radio) => {
     radio.addEventListener("change", handleRadioChange);
@@ -10,13 +11,14 @@ function handleRadioChange(event) {
 
     if (selectedRadio.checked) {
         const cep = selectedRadio.value;
-        console.log(`Endereço com ID ${cep} selecionado`);
+        console.log(`O CEP selecionado é: ${cep}`);
         $.ajax({
             url: "/delivery-value/" + cep,
             dataType: "json",
             contentType: "application/json",
             success: function (response) {
                 spanPrice.textContent = response.delivery_value;
+                btnContinue.removeAttribute("disabled");
             },
             error: function (xhr, textStatus, errorThrown) {
                 console.log(xhr);
