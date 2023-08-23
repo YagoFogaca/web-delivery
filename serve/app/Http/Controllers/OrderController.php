@@ -20,7 +20,7 @@ class OrderController extends Controller
 
     public function deliveryAddress()
     {
-        $user = User::find(Auth::id())->with('address')->first()->toArray();
+        $user = User::where('id', Auth::id())->with('address')->first()->toArray();
         return view('pages.delivery-address.index', ['adresses' => $user['address']]);
     }
 
