@@ -60,8 +60,9 @@
         </section>
 
         <section class="card-shopping-bag-footer">
-            <button type="submit" class="btn btn-primary">Finalizar Pedido R$ <span>{{ $shoppingBag['price'] }}</span>
-            </button>
+            <a href={{ route('address.order') }} class="btn btn-primary">Finalizar Pedido R$
+                <span>{{ $shoppingBag['price'] }}</span>
+            </a>
         </section>
     </section>
 @endsection

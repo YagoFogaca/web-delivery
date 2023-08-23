@@ -7,6 +7,7 @@ use App\Http\Controllers\PlatformController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\ShoppingBag;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 
 Route::controller(StoreController::class)->group(function () {
@@ -40,6 +41,12 @@ Route::controller(ShoppingBag::class)->group(function () {
     Route::get('/item-bag', 'index')->middleware('auth')->name('item.index');
     Route::patch('/bag-item/{bagItem}', 'update')->middleware('auth')->name('item.update');
     Route::delete('/delete-bag-item/{bagItem}', 'destroy')->middleware('auth')->name('item.destroy');
+});
+
+
+Route::controller(OrderController::class)->group(function () {
+    Route::get('/delivery-address', 'deliveryAddress')->middleware('auth')->name('address.order');
+    Route::post('/delivery-address', 'create')->middleware('auth')->name('order.store');
 });
 
 Route::controller(PlatformController::class)->group(function () {
