@@ -1,4 +1,4 @@
-const radioInputs = document.querySelectorAll(".form-check-input");
+const radioInputs = document.getElementsByName("address");
 const spanPrice = document.getElementById("delivery-value");
 const inputDeliveryValue = document.getElementById("delivery_value");
 const btnContinue = document.getElementById("continue");
