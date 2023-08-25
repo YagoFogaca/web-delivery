@@ -6,6 +6,7 @@ use App\Models\Store;
 use Exception;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Orders;
 use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
@@ -20,8 +21,8 @@ class OrderController extends Controller
 
     public function deliveryAddress()
     {
-        $user = User::where('id', Auth::id())->with('address')->first()->toArray();
-        return view('pages.delivery-address.index', ['adresses' => $user['address']]);
+        $user = User::where('id', Auth::id())->with('shoppingBag')->with('address')->first()->toArray();
+        return view('pages.delivery-address.index', ['adresses' => $user['address'], 'shoppingBag' => $user['shopping_bag']]);
     }
 
     /**
@@ -29,12 +30,24 @@ class OrderController extends Controller
      */
     public function create(Request $req)
     {
-        // Recebo o id do endereço
-        // Pegar o ID do usuario
-        // Com o id do usuario trazer sua sacola com seus itens
-        // Montar pedido com ???????????
-        // ONDE IMPLEMENTAR O PREÇO DO FRETE? DEVOLVER COM O TOTAL DO PEDIDO
-        dd($req->all());
+        try {
+            $order = [
+                "user_id" => Auth::id(),
+                "code" => rand(1000, 9999),
+                "shopping_bag_id" => $req->input('shopping_bag_id'),
+                "address_id" => $req->input('address_id'),
+                "delivery_value" => $req->input('delivery_value')
+            ];
+            $orderCreated = Orders::create($order);
+            if (!$orderCreated) {
+                throw new Exception('Ocorreu um erro interno');
+            }
+            dd('Será que criou');
+            return redirect()->route('order.payment.method');
+        } catch (Exception $error) {
+            dd($error);
+            return redirect()->back()->withErrors(['order', 'Ocorreu um erro interno']);
+        }
     }
 
     public function deliveryValue(String $code)

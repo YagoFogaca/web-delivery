@@ -1,5 +1,6 @@
 const radioInputs = document.querySelectorAll(".form-check-input");
 const spanPrice = document.getElementById("delivery-value");
+const inputDeliveryValue = document.getElementById("delivery_value");
 const btnContinue = document.getElementById("continue");
 
 radioInputs.forEach((radio) => {
@@ -18,6 +19,7 @@ function handleRadioChange(event) {
             contentType: "application/json",
             success: function (response) {
                 spanPrice.textContent = response.delivery_value;
+                inputDeliveryValue.value = response.delivery_value;
                 btnContinue.removeAttribute("disabled");
             },
             error: function (xhr, textStatus, errorThrown) {

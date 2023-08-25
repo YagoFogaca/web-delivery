@@ -32,6 +32,9 @@
                 @endforeach
 
                 <section class="card-shopping-bag-footer">
+                    <input type="hidden" name="shopping_bag_id" value="{{ $shoppingBag['id'] }}">
+                    <input type="hidden" name="address_id" value="{{ $address['id'] }}">
+                    <input type="hidden" id="delivery_value" name="delivery_value" value="">
                     <div class="card-price">
                         <p>Total entrega:</p> <span>RS <span id="delivery-value">0</span>,00</span>
                     </div>
