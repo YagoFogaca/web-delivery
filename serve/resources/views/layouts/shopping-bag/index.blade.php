@@ -24,6 +24,8 @@
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <script src={{ asset('/assets/js/modal-products.js') }}></script>
     <script src={{ asset('/assets/js/delivery-value.js') }}></script>
+    <script src={{ asset('/assets/js/offcanvas-money.js') }}></script>
+    <script src={{ asset('/assets/js/payment-method.js') }}></script>
 </body>
 
 </html>

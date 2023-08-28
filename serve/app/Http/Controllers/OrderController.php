@@ -7,6 +7,7 @@ use Exception;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Orders;
+use App\Models\ShoppingBag;
 use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
@@ -36,14 +37,44 @@ class OrderController extends Controller
                 "code" => rand(1000, 9999),
                 "shopping_bag_id" => $req->input('shopping_bag_id'),
                 "address_id" => $req->input('address_id'),
-                "delivery_value" => $req->input('delivery_value')
+                "delivery_value" => $req->input('delivery_value'),
+                "total_payable" => 0
             ];
+            $shoppingBag = ShoppingBag::where('user_id', Auth::id())->first()->toArray();
+            $order['total_payable'] = $shoppingBag['price'] + $order['delivery_value'];
             $orderCreated = Orders::create($order);
             if (!$orderCreated) {
                 throw new Exception('Ocorreu um erro interno');
             }
-            dd('Será que criou');
-            return redirect()->route('order.payment.method');
+            $order = Orders::where('user_id', Auth::id())->first()->toArray();
+            return redirect()->route('order.payment.method', ['order' => $order['id']]);
+        } catch (Exception $error) {
+            dd($error);
+            return redirect()->back()->withErrors(['order', 'Ocorreu um erro interno']);
+        }
+    }
+
+    public function indexPaymentMethod(Orders $order)
+    {
+        return view('pages.payment-method.index', ['order' => $order]);
+    }
+
+    public function paymentMethod(Orders $order, Request $req)
+    {
+
+        try {
+            $paymentMethod = [
+                "payment_method" => $req->input('payment-method'),
+                "change_cash" => $req->input('change-cash')
+            ];
+
+            $orderUpdated = $order->update($paymentMethod);
+            if (!$orderUpdated) {
+                throw new Exception('Ocorreu um erro interno');
+            }
+
+            dd($orderUpdated);
+            // return redirect()->route('order.payment.method', ['order' => $order['id']]);
         } catch (Exception $error) {
             dd($error);
             return redirect()->back()->withErrors(['order', 'Ocorreu um erro interno']);
@@ -52,7 +83,6 @@ class OrderController extends Controller
 
     public function deliveryValue(String $code)
     {
-        // dd($code);
         try {
             $store = Store::all()->first()->toArray();
             $cepStore = $store['cep'];

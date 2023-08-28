@@ -297,6 +297,41 @@ div.card-products-items .input-group-text {
     border-top: 1px solid #dee2e6;
 }
 
+#btn-money {
+    display: none;
+}
+
+.card-shopping-bag-body .btn-outline-primary {
+    width: 100%;
+    color: #1d1c1c;
+    border: 1px solid #f86f03;
+    margin-top: 35px;
+    transition: all 300ms ease-in;
+}
+
+.card-shopping-bag-body .btn-outline-primary:hover {
+    color: #eeeded;
+    background-color: #f86f03;
+    opacity: 0.8;
+}
+
+.offcanvas-body {
+    padding: 0 15px;
+}
+
+.offcanvas-body .btn-outline-primary {
+    width: 100%;
+    color: #1d1c1c;
+    border: 1px solid #f86f03;
+    transition: all 300ms ease-in;
+}
+
+.offcanvas-body .btn-outline-primary:hover {
+    color: #eeeded;
+    background-color: #f86f03;
+    opacity: 0.8;
+}
+
 @media (min-width: 767px) {
     .card {
         max-width: 325px;
