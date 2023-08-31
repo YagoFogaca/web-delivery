@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Store;
+use App\Models\OpenHours;
 use Exception;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -13,6 +14,16 @@ use Illuminate\Support\Facades\Hash;
 class StoreController extends Controller
 {
     use AuthorizesRequests, ValidatesRequests;
+
+    public function login()
+    {
+        return view('pages.login-store.index');
+    }
+
+    public function contact(Store $store)
+    {
+        return view('pages.edit-contact.index', ['store' => $store]);
+    }
 
     public function auth(Request $req)
     {
@@ -41,7 +52,7 @@ class StoreController extends Controller
         }
     }
 
-    public function contact(Store $store, Request $req)
+    public function updateContact(Store $store, Request $req)
     {
         $req->validate(
             [
@@ -61,7 +72,12 @@ class StoreController extends Controller
         }
     }
 
-    public function security(Store $store, Request $req)
+    public function security()
+    {
+        return view('pages.store-security.index');
+    }
+
+    public function securityUpdate(Store $store, Request $req)
     {
         $req->validate(
             [
@@ -83,7 +99,12 @@ class StoreController extends Controller
         }
     }
 
-    public function address(Store $store, Request $req)
+    public function address(Store $store)
+    {
+        return view('pages.store-address.index', ['store' => $store]);
+    }
+
+    public function addressUpdate(Store $store, Request $req)
     {
         $req->validate([
             'cep' => 'required|min:8|max:8',
@@ -105,6 +126,28 @@ class StoreController extends Controller
             return redirect()->back()->with('address', 'Endereço atualizado com sucesso');
         } catch (Exception $error) {
             return redirect()->back()->withErrors(['error' => $error->getMessage()]);
+        }
+    }
+
+    public function openHours()
+    {
+        $openHours = OpenHours::all(['*'])->toArray();
+        return view('pages.open-hours.index', ['open_hours' => $openHours]);
+    }
+
+    public function openHoursUpdate(Request $req)
+    {
+        $hours = $req->all();
+        try {
+            foreach ($hours['data'] as $hour) {
+                $openHourModel = OpenHours::where('day', $hour['day'])->update($hour);
+                if (!$openHourModel) {
+                    throw new Exception("O dia {$hour['day']} não foi possivel ser atualizado");
+                }
+            }
+            return response()->json(["mensage" => "Horarios atualizados com suceso"], 200);
+        } catch (Exception $error) {
+            return response()->json(['mensage' => $error->getMessage()], 400);
         }
     }
 }

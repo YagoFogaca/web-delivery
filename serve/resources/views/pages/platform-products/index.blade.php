@@ -34,7 +34,7 @@
         <section class="container-products">
             <div class="container-products--infos">
                 <h4>Produtos</h4>
-                <a href={{ route('platform.create.products') }} class="btn btn-outline-primary">Criar produto</a>
+                <a href={{ route('products.create') }} class="btn btn-outline-primary">Criar produto</a>
             </div>
             <article class="cards-products">
                 @foreach ($products as $product)
@@ -44,6 +44,7 @@
                             <div class="d-flex justify-content-between">
                                 <h5 class="card-title">{{ $product['name'] }}</h5>
                                 <form class="form-check form-switch">
+                                    @csrf
                                     <input class="form-check-input active-product" type="checkbox" name="active"
                                         role="switch" id="active" {{ $product['active'] ? 'checked' : '' }}>
                                     <label class="form-check-label" for="active">Ativo</label>
@@ -62,7 +63,7 @@
                             </div>
 
                             <div class="d-grid gap-2">
-                                <a href={{ route('platform.edit.products', ['product' => $product['id']]) }}
+                                <a href={{ route('products.edit', ['product' => $product['id']]) }}
                                     class="btn btn-warning">Editar</a>
                                 <form action={{ route('products.delete', ['id' => $product['id']]) }} method="POST">
                                     @csrf

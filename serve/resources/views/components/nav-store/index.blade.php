@@ -16,7 +16,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href={{ route('platform.products') }}>Produtos</a>
+                    <a class="nav-link" href={{ route('products.index') }}>Produtos</a>
                 </li>
 
                 <li class="nav-item">
@@ -30,17 +30,17 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end">
                         <li><a class="dropdown-item"
-                                href={{ route('platform.edit.contact', ['store' => Auth::guard('store')->user()->id]) }}>Contato</a>
+                                href={{ route('store.contact.edit', ['store' => Auth::guard('store')->user()->id]) }}>Contato</a>
                         </li>
                         <li><a class="dropdown-item"
-                                href={{ route('platform.address.store', ['store' => Auth::guard('store')->user()->id]) }}>Endereço</a>
+                                href={{ route('store.address.edit', ['store' => Auth::guard('store')->user()->id]) }}>Endereço</a>
                         </li>
-                        <li><a class="dropdown-item" href={{ route('platform.open-hours.store') }}>Horario de
+                        <li><a class="dropdown-item" href={{ route('store.open-hours.edit') }}>Horario de
                                 Funcionamento</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item" href={{ route('platform.security.store') }}>Segurança</a>
+                        <li><a class="dropdown-item" href={{ route('store.security.edit') }}>Segurança</a>
                         </li>
                     </ul>
                 </li>

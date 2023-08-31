@@ -51,7 +51,7 @@
                 </div>
 
                 <div class="mb-3">
-                    <p style="font-size: 14px;">Já tem conta? <a href={{ route('login') }}>Clique aqui</a></p>
+                    <p style="font-size: 14px;">Já tem conta? <a href={{ route('user.login') }}>Clique aqui</a></p>
                 </div>
 
                 <div class="d-grid gap-2">

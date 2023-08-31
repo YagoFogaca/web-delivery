@@ -9,7 +9,7 @@
                 </a>
             </div>
 
-            <form method="POST" action={{ route('user.create.address') }} class="form-login">
+            <form method="POST" action={{ route('user.address.store') }} class="form-login">
                 @error('error')
                     <div class='invalid-feedback'><span>{{ $message }}</span></div>
                 @enderror

@@ -9,7 +9,13 @@ use Illuminate\Support\Facades\Auth;
 
 class AddressController extends Controller
 {
-    public function create(Request $req)
+
+    public function create()
+    {
+        return view('pages.user-address.index');
+    }
+
+    public function store(Request $req)
     {
         $req->validate(
             [

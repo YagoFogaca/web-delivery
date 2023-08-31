@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Products;
 use App\Utils\Image\Image;
 use Exception;
@@ -9,6 +10,19 @@ use Illuminate\Http\Request;
 
 class ProductsController extends Controller
 {
+
+    public function index()
+    {
+        $categories = Category::with('products')->get(['*']);
+        $products = Products::with('category')->get(['*'])->toArray();
+        return view('pages.platform-products.index', ['categories' => $categories, 'products' => $products]);
+    }
+
+    public function store()
+    {
+        $categories = Category::with('products')->get(['*']);
+        return view('pages.create-products.index', ['categories' => $categories]);
+    }
 
     public function create(Request $req)
     {
@@ -61,6 +75,12 @@ class ProductsController extends Controller
         } catch (Exception $error) {
             return redirect()->back()->withErrors(['products', 'Ocorreu um erro ao deletar o produto']);
         }
+    }
+
+    public function edit(Products $product)
+    {
+        $categories = Category::with('products')->get();
+        return view('pages.edit-products.index', ['product' => $product->toArray(), 'categories' => $categories]);
     }
 
     public function update(Products $product, Request $req)

@@ -11,6 +11,43 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+    public function login()
+    {
+        return view('pages.login-user.index');
+    }
+
+    public function auth(Request $req)
+    {
+        $req->validate(
+            [
+                'email' => 'required',
+                'password' => 'required|min:6'
+            ],
+            [
+                'email' => 'Email inválido',
+                'password' => 'Sua senha deve ser maior que 6 caracteres'
+            ]
+        );
+
+        try {
+            $user = [
+                'email' => $req->input('email'),
+                'password' => $req->input('password')
+            ];
+
+            if (!Auth::attempt($user)) {
+                return redirect()->back()->withErrors(['error' => 'Email ou senha inválidos']);
+            };
+            return redirect()->route('menu.home');
+        } catch (Exception $error) {
+            return redirect()->back()->withErrors(['error' => $error->getMessage()]);
+        }
+    }
+
+    public function create()
+    {
+        return view('pages.create-account.index');
+    }
 
     public function store(Request $req)
     {
@@ -45,35 +82,7 @@ class UserController extends Controller
             Auth::attempt(['email' => $req->input('email'), 'password' => $req->input('password')]);
             ShoppingBag::create(['user_id' => Auth::id(), 'price' => 0.00]);
 
-            return redirect()->route('user.address')->with('auth', 'Conta criado com sucesso faça Login');
-        } catch (Exception $error) {
-            return redirect()->back()->withErrors(['error' => $error->getMessage()]);
-        }
-    }
-
-    public function auth(Request $req)
-    {
-        $req->validate(
-            [
-                'email' => 'required',
-                'password' => 'required|min:6'
-            ],
-            [
-                'email' => 'Email inválido',
-                'password' => 'Sua senha deve ser maior que 6 caracteres'
-            ]
-        );
-
-        try {
-            $user = [
-                'email' => $req->input('email'),
-                'password' => $req->input('password')
-            ];
-
-            if (!Auth::attempt($user)) {
-                return redirect()->back()->withErrors(['error' => 'Email ou senha inválidos']);
-            };
-            return redirect()->route('menu.home');
+            return redirect()->route('user.address.create')->with('auth', 'Conta criado com sucesso faça Login');
         } catch (Exception $error) {
             return redirect()->back()->withErrors(['error' => $error->getMessage()]);
         }

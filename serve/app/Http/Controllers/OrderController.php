@@ -13,20 +13,14 @@ use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
 
-    public function deliveryAddress()
+    public function address()
     {
         $user = User::where('id', Auth::id())->with('shoppingBag')->with('address')->first()->toArray();
         return view('pages.delivery-address.index', ['adresses' => $user['address'], 'shoppingBag' => $user['shopping_bag']]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create(Request $req)
+    public function store(Request $req)
     {
         try {
             $order = [
@@ -51,13 +45,13 @@ class OrderController extends Controller
         }
     }
 
-    public function indexPaymentMethod(Orders $order)
+    public function paymentMethod(Orders $order)
     {
         return view('pages.payment-method.index', ['order' => $order]);
     }
 
     // Este será o método que fechará a solicitação de pedido, enviando para o wpp
-    public function paymentMethod(Orders $order, Request $req)
+    public function paymentMethodUpdate(Orders $order, Request $req)
     {
 
         try {
@@ -108,45 +102,5 @@ class OrderController extends Controller
         } catch (Exception $error) {
             return response()->json(["error" => $error->getMessage()], 400);
         }
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 }
