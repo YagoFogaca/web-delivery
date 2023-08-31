@@ -275,6 +275,10 @@ div.card-products-items .input-group-text {
     border-bottom: 1px solid #dee2e6;
 }
 
+.form-check-variant {
+    border-top: 1px solid #dee2e6;
+}
+
 .form-check-input:checked {
     background-color: #f86f03;
     border-color: #f86f03;
@@ -330,6 +334,24 @@ div.card-products-items .input-group-text {
     color: #eeeded;
     background-color: #f86f03;
     opacity: 0.8;
+}
+
+.summary-value {
+    padding: 1rem 1rem;
+    border-bottom: 1px solid #dee2e6;
+    margin-bottom: 15px;
+}
+
+.value {
+    width: 20%;
+}
+
+.infos-title {
+    color: #00000096;
+}
+
+.infos-title-variant {
+    font-weight: 600;
 }
 
 @media (min-width: 767px) {

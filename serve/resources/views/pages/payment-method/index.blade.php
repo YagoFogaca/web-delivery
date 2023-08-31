@@ -10,12 +10,36 @@
         </article>
 
         <section class="d-flex flex-column card-shopping-bag-body">
+
+            <div class="summary-value">
+                <h5>Resumo de valores</h5>
+
+                <div class="summary-value-infos">
+                    <div class="d-flex justify-content-between">
+                        <p>Subtotal</p>
+                        <p class="value">R$
+                            {{ number_format($order['total_payable'] - $order['delivery_value'], 2, ',', '') }}</p>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <p class="infos-title">Taxa de entrega</p>
+                        <p class="value">R$ {{ number_format($order['delivery_value'], 2, ',', '') }}</p>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <p class="infos-title-variant">Total</p>
+                        <p class="value">R$ {{ number_format($order['total_payable'], 2, ',', '') }}</p>
+                    </div>
+                </div>
+
+            </div>
+
             <form action={{ route('order.payment.method.update', ['order' => $order['id']]) }} method="POST"
                 style="padding: 5px;">
                 @csrf
                 @method('PATCH')
 
-                <div class="form-check">
+                <h5 style="margin-bottom: 1.2rem;">Método de pagamento</h5>
+
+                <div class="form-check form-check-variant">
                     <input class="form-check-input" type="radio" name="payment-method" id="cartao_credito"
                         value="cartão de crédito">
                     <label style="min-width: 50%;" class="form-check-label" for="cartao_credito">
@@ -62,9 +86,10 @@
                     <div class="card-price">
                         <p>Total com a entrega:</p> <span>RS {{ $order['total_payable'] }}</span>
                     </div>
-                    <button id="continue" type="submit" class="btn btn-primary" disabled>Continuar</button>
+                    <button id="continue" type="submit" class="btn btn-primary" disabled>Finalizar pedido</button>
                 </section>
             </form>
+
         </section>
 
         <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Orders;
 use App\Models\ShoppingBag;
+use App\Models\BagItem;
 use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
@@ -15,10 +16,6 @@ class OrderController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        //
-    }
 
     public function deliveryAddress()
     {
@@ -59,6 +56,7 @@ class OrderController extends Controller
         return view('pages.payment-method.index', ['order' => $order]);
     }
 
+    // Este será o método que fechará a solicitação de pedido, enviando para o wpp
     public function paymentMethod(Orders $order, Request $req)
     {
 
@@ -73,8 +71,7 @@ class OrderController extends Controller
                 throw new Exception('Ocorreu um erro interno');
             }
 
-            dd($orderUpdated);
-            // return redirect()->route('order.payment.method', ['order' => $order['id']]);
+            return redirect()->route('order.confirm', ['order' => $order['id']]);
         } catch (Exception $error) {
             dd($error);
             return redirect()->back()->withErrors(['order', 'Ocorreu um erro interno']);
