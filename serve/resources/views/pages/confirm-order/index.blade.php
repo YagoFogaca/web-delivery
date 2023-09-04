@@ -32,8 +32,7 @@
 
             </div>
 
-            <form action={{ route('order.payment.method.update', ['order' => $order['id']]) }} method="POST"
-                style="padding: 5px;">
+            <form action={{ route('order.order.closing', ['order' => $order['id']]) }} method="POST" style="padding: 5px;">
                 @csrf
                 @method('PATCH')
 
@@ -83,9 +82,6 @@
                 <input type="hidden" name="change-cash" value="0.00" id="input-change-cash">
 
                 <section class="card-shopping-bag-footer">
-                    <div class="card-price">
-                        <p>Total com a entrega:</p> <span>RS {{ $order['total_payable'] }}</span>
-                    </div>
                     <button id="continue" type="submit" class="btn btn-primary" disabled>Finalizar pedido</button>
                 </section>
             </form>

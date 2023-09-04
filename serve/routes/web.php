@@ -127,8 +127,8 @@ Route::controller(OrderController::class)->group(function () {
     Route::get('/delivery-value/{code}', 'deliveryValue')->middleware('auth')->name('order.delivery.value');
 
     // Página e action de adicionar o método de pagamento
-    Route::get('/payment-method/{order}', 'paymentMethod')->middleware('auth')->name('order.payment.method');
-    Route::patch('/payment-method/{order}', 'paymentMethodUpdate')->middleware('auth')->name('order.payment.method.update');
+    Route::get('/confirm-order/{order}', 'confirmOrder')->middleware('auth')->name('order.confirm.order');
+    Route::patch('/order-closing/{order}', 'orderClosing')->middleware('auth')->name('order.order.closing');
 });
 
 /*
