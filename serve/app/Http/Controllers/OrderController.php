@@ -40,7 +40,6 @@ class OrderController extends Controller
             $order = Orders::where('user_id', Auth::id())->first()->toArray();
             return redirect()->route('order.payment.method', ['order' => $order['id']]);
         } catch (Exception $error) {
-            dd($error);
             return redirect()->back()->withErrors(['order', 'Ocorreu um erro interno']);
         }
     }
@@ -50,8 +49,7 @@ class OrderController extends Controller
         return view('pages.payment-method.index', ['order' => $order]);
     }
 
-    // Este será o método que fechará a solicitação de pedido, enviando para o wpp
-    public function paymentMethodUpdate(Orders $order, Request $req)
+    public function orderClosing(Orders $order, Request $req)
     {
 
         try {
@@ -65,7 +63,24 @@ class OrderController extends Controller
                 throw new Exception('Ocorreu um erro interno');
             }
 
-            return redirect()->route('order.confirm', ['order' => $order['id']]);
+            $order->address->toArray();
+            $order->user->toArray();
+            $order->address->toArray();
+            $order->shoppingBag->bagItem->toArray();
+            $orderUser =  $order->toArray();
+            $productsOrder = BagItem::where('shopping_bag_id', $orderUser['shopping_bag_id'])->with('product')->get()->toArray();
+
+            $productsOrderMsg = '';
+            $addressOrderMsg = "{$orderUser['address']['street']}, {$orderUser['address']['district']} - {$orderUser['address']['number_address']}%0A%0ACompl: {$orderUser['address']['complement']} %0A%0AValor do frete: R$ {$orderUser['delivery_value']}%0A%0A";
+            $orderSummary = "Subtotal: R$ {$orderUser['shopping_bag']['price']} %0A%0AValor do frete: R$ {$orderUser['delivery_value']} %0A%0ATotal: R$ {$orderUser['total_payable']} %0A%0AMetodo de pagamento: {$orderUser['payment_method']}%0A%0A";
+            foreach ($productsOrder as  $productOrder) {
+                $productsOrderMsg .= "{$productOrder['product']['name']} - R$ {$productOrder['price']}%0AOBS: {$productOrder['observation']}%0A%0A";
+            }
+
+            $orderMsg = "Olá, quero fazer um pedido.%0A%0APedido: %0A{$productsOrderMsg} Endereço de entrega:%0A{$addressOrderMsg} %0APagamento: %0A{$orderSummary}";
+            $url = "https://wa.me/5532988396048?text=$orderMsg";
+
+            return view('pages.confirm-order.index', ['order' => $order, 'url' => $url]);
         } catch (Exception $error) {
             dd($error);
             return redirect()->back()->withErrors(['order', 'Ocorreu um erro interno']);

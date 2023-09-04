@@ -126,6 +126,9 @@ Route::controller(OrderController::class)->group(function () {
     // Consultar preço do frete do pedido
     Route::get('/delivery-value/{code}', 'deliveryValue')->middleware('auth')->name('order.delivery.value');
 
+    // Página para selecionar o metodo de pagamento
+    Route::get('/payment-method/{order}', 'paymentMethod')->middleware('auth')->name('order.payment.method');
+
     // Página e action de adicionar o método de pagamento
     Route::get('/confirm-order/{order}', 'confirmOrder')->middleware('auth')->name('order.confirm.order');
     Route::patch('/order-closing/{order}', 'orderClosing')->middleware('auth')->name('order.order.closing');
